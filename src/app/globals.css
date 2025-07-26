@@ -19,6 +19,15 @@
   }
 }
 
+@custom-variant hover {
+  @media (min-width: 640px) {
+    &:hover {
+      @slot;
+
+    }
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
