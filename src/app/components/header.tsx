@@ -2,9 +2,8 @@
 const DashboardHeader = () => {
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl border-b border-gray-100 top-0 z-40">
 
-      
+      <>
       <div className="px-4 sm:px-6 lg:px-8">
 
         {/* Main Header */}
@@ -54,8 +53,8 @@ const DashboardHeader = () => {
       </div>
 
       {/* Mobile Bottom Border Gradient */}
-      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-    </div>
+      <div className="md:hidden h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+      </>
   );
 };
 
