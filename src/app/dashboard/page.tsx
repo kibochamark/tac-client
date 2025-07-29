@@ -18,7 +18,7 @@ const DashboardPage = () => (
         {/* Chart and Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow p-4">
+            <div className="bg-white rounded-lg shadow">
               <VascularAccessChart />
             </div>
           </div>
@@ -30,7 +30,7 @@ const DashboardPage = () => (
         {/* Events and Doctors */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow p-4">
+            <div className="bg-white rounded-2xl shadow ">
               <CommonAccessEvents />
             </div>
           </div>
@@ -40,7 +40,7 @@ const DashboardPage = () => (
         </div>
 
         {/* Appointments */}
-        <div className="overflow-x-auto bg-white rounded-lg shadow p-4">
+        <div className="overflow-x-auto bg-white rounded-2xl shadow">
           <AppointmentsTable />
         </div>
       </main>

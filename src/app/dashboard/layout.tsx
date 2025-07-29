@@ -1,21 +1,35 @@
 // app/dashboard/layout.tsx
 'use client'
 
-
-import React from 'react'
+import React, { useState } from 'react'
 import DashboardHeader from '../components/header'
 import Sidebar from '../components/layout/sidebar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
-            <Sidebar />
-            <div className="flex-1 flex flex-col">
-                <DashboardHeader />
-                <main className="flex-1 p-4 sm:p-6 overflow-auto">{children}</main>
+        <div className="min-h-screen bg-gray-50">
+            {/* Mobile-first layout */}
+            <div className="flex flex-col lg:flex-row">
+                {/* Sidebar - Hidden on mobile by default, can be toggled */}
+                <div className="lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
+                    <Sidebar isMobileMenuOpen={isMobileMenuOpen}
+                        setIsMobileMenuOpen={setIsMobileMenuOpen} />
+                </div>
+
+                {/* Main content area */}
+                <div className="flex flex-col flex-1 lg:ml-64">
+                    {/* Header */}
+                    <DashboardHeader />
+
+                    {/* Main content */}
+                    <main className="flex-1 p-2 sm:p-4 lg:p-8 overflow-auto">
+                        {children}
+                    </main>
+                </div>
             </div>
         </div>
     )
 }
-
 export default DashboardLayout

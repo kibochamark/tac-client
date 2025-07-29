@@ -20,7 +20,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
     };
 
     const inputClass =
-        'w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-700 placeholder-gray-400';
+        'w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:bg-white focus:ring-4 focus:ring-purple-100 transition-all duration-200';
 
     return (
         <div className=" flex items-center justify-center bg-gray-50 p-4">

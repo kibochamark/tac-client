@@ -44,8 +44,8 @@ const DoctorsList = () => {
   ]
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-6">
-      <div className="flex items-center space-x-2 mb-6">
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-2">
+      <div className="flex items-center space-x-2 mb-6 p-2">
         <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
           <BiUser className="w-4 h-4 text-purple-500" />
         </div>
@@ -54,7 +54,7 @@ const DoctorsList = () => {
 
       <div className="space-y-4">
         {doctors.map((doctor, index) => (
-          <div key={index} className="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
+          <div key={index} className="flex items-center space-x-2 p-4 hover:bg-gray-50 rounded-lg transition-colors">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center text-blue-500 font-semibold">
               {doctor.initials}
             </div>

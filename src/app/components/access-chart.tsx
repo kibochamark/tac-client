@@ -10,7 +10,7 @@ const data = [
 ]
 
 const VascularAccessChart = () => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-sm hover:shadow-xl border border-gray-200 p-2">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-2">
@@ -23,7 +23,7 @@ const VascularAccessChart = () => (
         </div>
 
         {/* Chart Bars */}
-        <div className="flex items-end justify-center space-x-4 mb-8 h-48">
+        <div className="flex items-end justify-center space-x-2 mb-8 h-48">
             {data.map((item, i) => (
                 <div key={i} className="flex flex-col items-center">
                     <div
@@ -46,7 +46,7 @@ const VascularAccessChart = () => (
                         <span className="font-medium text-gray-900">{item.name}</span>
                         <span className="text-sm text-gray-500">({item.status})</span>
                     </div>
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
                         <span className="font-bold text-gray-900">{item.count}</span>
                         <span className="text-sm text-gray-600">{item.percentage}%</span>
                         <span className={`text-sm ${item.change.includes('↗') ? 'text-green-600' : 'text-red-600'}`}>

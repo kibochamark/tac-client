@@ -32,7 +32,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="bg-gray-50 flex items-center justify-center p-5">
+    <div className="bg-gray-50 hidden lg:flex items-center justify-center p-5">
       <div className="bg-white rounded-3xl p-10 shadow-2xl w-full max-w-md backdrop-blur-sm bg-opacity-95">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {fields.map(({ id, type, label, placeholder }) => (

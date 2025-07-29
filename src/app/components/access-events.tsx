@@ -53,8 +53,8 @@ const CommonAccessEvents = () => {
     ]
 
     return (
-        <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-8 my-6">
-            <div className="flex items-center space-x-2 mb-6 p-4">
+        <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-4 my-6">
+            <div className="flex items-center space-x-2 mb-6 ">
                 <div className="w-8 h-8 bg-gradient-to-r from-orange-300 to-red-400 rounded-full flex items-center justify-center">
                     <TbActivityHeartbeat className="w-4 h-4 text-white" />
                 </div>
@@ -73,7 +73,7 @@ const CommonAccessEvents = () => {
                                     {event.severity}
                                 </span>
                             </div>
-                            <div className="flex flex-col items-center space-x-4">
+                            <div className="flex flex-col items-center space-x-2">
                                 <span className="font-bold text-gray-900 text-lg">{event.count}</span>
                                 <span className={`text-sm ${event.changeColor}`}>
                                     {event.change}
