@@ -1,26 +1,56 @@
+'use client';
 
-const DashboardHeader = () => {
+import React from 'react';
+
+interface DashboardHeaderProps {
+  username: string;
+  date?: string;
+  time?: string;
+  description?: string;
+}
+
+const getGreeting = () => {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good Morning';
+  if (hour < 18) return 'Good Afternoon';
+  return 'Good Evening';
+};
+
+const DashboardHeader: React.FC<DashboardHeaderProps> = ({
+  username,
+  date,
+  time,
+  description,
+}) => {
+  const greeting = `${getGreeting()} ${username}`;
+
+  const currentDate = date || new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const currentTime = time || new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const paragraph =
+    description || `Here's what's happening with your patients today`;
 
   return (
-
-      <>
+    <>
       <div className="px-4 sm:px-6 lg:px-8">
-
-        {/* Main Header */}
         <div className="py-4 sm:py-6">
           <div className="flex items-start justify-between gap-4">
             {/* Left Section */}
             <div className="flex items-start space-x-3 sm:space-x-4 min-w-0 flex-1">
-
               <div className="min-w-0 flex-1">
-                <div className="flex items-center space-x-2 mb-1">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                    Good evening, Sarah
-                  </h1>
-                  <span className="text-xl sm:text-2xl">👋</span>
-                </div>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1">
+                  {greeting}
+                </h1>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Here&apos;s what&apos;s happening with your patients today
+                  {paragraph}
                 </p>
 
                 {/* Mobile-only quick stats */}
@@ -40,12 +70,12 @@ const DashboardHeader = () => {
             {/* Right Section - Hidden on mobile */}
             <div className="hidden lg:flex items-center space-x-4">
               <div className="text-right">
-                <p className="text-sm font-medium text-gray-900">Friday, July 25</p>
-                <p className="text-xs text-gray-500">2:34 PM</p>
+                <h3 className="text-sm font-medium text-gray-900">{currentDate}</h3>
+                <p className="text-xs text-gray-500">{currentTime}</p>
               </div>
 
               <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold shadow-lg">
-                S
+                {username.charAt(0).toUpperCase()}
               </div>
             </div>
           </div>
@@ -54,7 +84,7 @@ const DashboardHeader = () => {
 
       {/* Mobile Bottom Border Gradient */}
       <div className="md:hidden h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-      </>
+    </>
   );
 };
 

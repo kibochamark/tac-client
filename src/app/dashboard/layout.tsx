@@ -1,8 +1,6 @@
 // app/dashboard/layout.tsx
-'use client'
-
+'use client';
 import React, { useState } from 'react'
-import DashboardHeader from '../components/header'
 import Sidebar from '../components/layout/sidebar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -14,14 +12,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="flex flex-col lg:flex-row">
                 {/* Sidebar - Hidden on mobile by default, can be toggled */}
                 <div className="lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
-                    <Sidebar isMobileMenuOpen={isMobileMenuOpen}
-                        setIsMobileMenuOpen={setIsMobileMenuOpen} />
+                    <Sidebar
+                        isMobileMenuOpen={isMobileMenuOpen}
+                        setIsMobileMenuOpen={setIsMobileMenuOpen}
+                    />
                 </div>
 
                 {/* Main content area */}
                 <div className="flex flex-col flex-1 lg:ml-64">
-                    {/* Header */}
-                    <DashboardHeader />
 
                     {/* Main content */}
                     <main className="flex-1 p-2 sm:p-4 lg:p-8 overflow-auto">
