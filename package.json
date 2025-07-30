@@ -10,12 +10,17 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.0",
+    "@mantine/core": "^8.2.1",
+    "@mantine/hooks": "^8.2.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.534.0",
     "next": "15.4.3",
-    "postcss": "^8.5.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.61.1",
     "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
     "zod": "^4.1.0-canary.20250725T001018"
   },
   "devDependencies": {
@@ -26,7 +31,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.3",
+    "postcss": "^8.5.6",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^4.1.11",
+    "tw-animate-css": "^1.3.6",
     "typescript": "^5"
   }
 }
