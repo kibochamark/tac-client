@@ -14,7 +14,7 @@ const DashboardPage = () => (
     <div className="flex-1 flex flex-col">
       <DashboardHeader username='Sarah' />
 
-      <main className="flex-1 p-4 sm:p-6 overflow-auto">
+      <div className="flex-1 p-4 sm:p-6 overflow-auto">
         <StatsCards />
 
         {/* Chart and Quick Actions */}
@@ -45,7 +45,7 @@ const DashboardPage = () => (
         <div className="overflow-x-auto bg-white rounded-2xl shadow">
           <AppointmentsTable />
         </div>
-      </main>
+      </div>
     </div>
   </div>
 )
