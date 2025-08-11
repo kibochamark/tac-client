@@ -7,6 +7,7 @@ interface DashboardHeaderProps {
   date?: string;
   time?: string;
   description?: string;
+  showGreeting?: boolean;
 }
 
 const getGreeting = () => {
@@ -21,6 +22,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   date,
   time,
   description,
+  showGreeting = false,
 }) => {
   const greeting = `${getGreeting()} ${username}`;
 
@@ -45,10 +47,16 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <div className="flex items-start justify-between gap-4">
             {/* Left Section */}
             <div className="flex items-start space-x-3 sm:space-x-4 min-w-0 flex-1">
-              <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1">
-                  {greeting}
-                </h1>
+              <div className="min-w-0 flex-1 -mt-2">
+                {showGreeting ? (
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1 py-2">
+                    {greeting}
+                  </h1>
+                ) : (
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1 py-2">
+                    {username}
+                  </h1>
+                )}
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {paragraph}
                 </p>
