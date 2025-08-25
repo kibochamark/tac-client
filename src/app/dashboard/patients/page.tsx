@@ -18,6 +18,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { BiEdit, BiSearch } from 'react-icons/bi';
 import DashboardHeader from '../../components/header';
 import PersonalInfo from './components/personal-info';
+import AccessInfo from '@/app/components/access-info';
+import Documents from '@/app/components/documents';
 
 const Page = () => {
 
@@ -211,35 +213,7 @@ const Page = () => {
                     <td>{row.evaluation}</td>
                     <td>{row.clinic}</td>
                     <td>
-                      <Modal
-                        opened={opened} onClose={close} title="Patient Details" size="xl"
-                      >
-                        {/* Modal content */}
-                        <Tabs  variant="pills" defaultValue="Personal Information" >
-                          <Tabs.List>
-                            <Tabs.Tab value="Personal Information">Personal Information</Tabs.Tab>
-                            <Tabs.Tab value="Access Information"> Access Information</Tabs.Tab>
-                            <Tabs.Tab value="Documents">Documents</Tabs.Tab>
-                          </Tabs.List>
-                          <Tabs.Panel value="Personal Information">
-                           <PersonalInfo/>
-                          </Tabs.Panel>
-                          <Tabs.Panel value="Access Information">
-                            <Stack>
-                              <TextInput label="Access Type" />
-                              <TextInput label="Location" />
-                              <TextInput label="Status" />
-                              <TextInput label="Last Evaluation" />
-                              <TextInput label="Clinic" />
-                            </Stack>
-                          </Tabs.Panel>
-                          <Tabs.Panel value="Documents">
-                            <Stack>
-                              <TextInput label="Documents" />
-                            </Stack>
-                          </Tabs.Panel>
-                        </Tabs>
-                      </Modal>
+
                       <ActionIcon variant="light" color="blue" radius="xl" onClick={open}>
                         <BiEdit size={18} />
                       </ActionIcon>
@@ -248,6 +222,27 @@ const Page = () => {
                 ))}
               </tbody>
             </Table>
+            <Modal
+              opened={opened} onClose={close} title="Patient Details" size="xl"
+            >
+              {/* Modal content */}
+              <Tabs variant="pills" defaultValue="Personal Information" >
+                <Tabs.List>
+                  <Tabs.Tab value="Personal Information">Personal Information</Tabs.Tab>
+                  <Tabs.Tab value="Access Information"> Access Information</Tabs.Tab>
+                  <Tabs.Tab value="Documents">Documents</Tabs.Tab>
+                </Tabs.List>
+                <Tabs.Panel value="Personal Information">
+                  <PersonalInfo />
+                </Tabs.Panel>
+                <Tabs.Panel value="Access Information">
+                  <AccessInfo />
+                </Tabs.Panel>
+                <Tabs.Panel value="Documents">
+                  <Documents />
+                </Tabs.Panel>
+              </Tabs>
+            </Modal>
           </ScrollArea>
         </Paper>
       </Stack>
