@@ -1,7 +1,7 @@
 // app/dashboard/layout.tsx
 'use client';
 import React, { useState } from 'react'
-import Sidebar from '../components/layout/sidebar'
+import Sidebar from '../../components/layout/sidebar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

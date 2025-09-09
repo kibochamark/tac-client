@@ -10,16 +10,16 @@ import {
   Stack,
   Table,
   Tabs,
-  TextInput,
+  TextInput
 } from '@mantine/core';
 import { useState } from 'react';
 
+import AccessInfo from '@/components/access-info';
+import Documents from '@/components/documents';
 import { useDisclosure } from '@mantine/hooks';
 import { BiEdit, BiSearch } from 'react-icons/bi';
-import DashboardHeader from '../../components/header';
-import PersonalInfo from './components/personal-info';
-import AccessInfo from '@/app/components/access-info';
-import Documents from '@/app/components/documents';
+import DashboardHeader from '../../../components/header';
+import PersonalInfo from '../../../components/personal-info';
 
 const Page = () => {
 
@@ -223,7 +223,7 @@ const Page = () => {
               </tbody>
             </Table>
             <Modal
-              opened={opened} onClose={close} title="Patient Details" size="xl"
+              opened={opened} onClose={close} title="Patient Details" size="xl" radius="md"
             >
               {/* Modal content */}
               <Tabs variant="pills" defaultValue="Personal Information" >
@@ -241,7 +241,7 @@ const Page = () => {
                 <Tabs.Panel value="Documents">
                   <Documents />
                 </Tabs.Panel>
-              </Tabs>
+              </Tabs>            
             </Modal>
           </ScrollArea>
         </Paper>

@@ -3,13 +3,13 @@
 
 import React, { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { handleNavigation } from '@/app/utils/navigation'
 import { MobileMenuToggle } from '../mobile-menu-toggle'
 import { SidebarHeader } from '../sidebar-header'
 import { SidebarNavigation } from '../sidebar-navigation'
 import { AddPatientButton } from '../add-patient-button'
 import { SidebarFooter } from '../sidebar-footer'
-import { useSidebar } from '@/app/hooks/useSidebar'
+import { useSidebar } from '@/hooks/useSidebar'
+import { handleNavigation } from '@/lib/utils'
 
 interface SidebarProps {
   isMobileMenuOpen: boolean

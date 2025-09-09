@@ -1,12 +1,12 @@
 'use client'
 
-import VascularAccessChart from "../components/access-chart"
-import CommonAccessEvents from "../components/access-events"
-import AppointmentsTable from "../components/appointments-table"
-import DoctorsList from "../components/doctors-list"
-import DashboardHeader from "../components/header"
-import QuickActions from "../components/quick-actions"
-import StatsCards from "../components/statscard"
+import VascularAccessChart from "../../components/access-chart"
+import CommonAccessEvents from "../../components/access-events"
+import AppointmentsTable from "../../components/appointments-table"
+import DoctorsList from "../../components/doctors-list"
+import DashboardHeader from "../../components/header"
+import QuickActions from "../../components/quick-actions"
+import StatsCards from "../../components/statscard"
 
 const DashboardPage = () => (
   <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">

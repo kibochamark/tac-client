@@ -1,4 +1,4 @@
-import { ActionIcon, Badge, Button, Group, Stack, Text } from "@mantine/core";
+import { ActionIcon, Badge, Button, Divider, Group, Stack, Text } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE, MS_EXCEL_MIME_TYPE, PDF_MIME_TYPE } from '@mantine/dropzone';
 import { useRef } from "react";
 import { BiImage, BiTrash, BiUpload, BiX } from "react-icons/bi";
@@ -26,6 +26,8 @@ const Documents = () => {
 
     return (
         <>
+              <Divider mb="xl" />
+
             <Dropzone
                 onDrop={handleDrop}
                 onReject={(files) => console.log('rejected files', files)}
@@ -93,6 +95,12 @@ const Documents = () => {
 
             <Group justify="center" mt="md">
                 <Button onClick={() => openRef.current?.()} >Select files</Button>
+            </Group>
+            <Group justify="flex-end" mt="md">
+                <Button type="reset" variant="outline">Cancel</Button>
+                <Button type="submit">
+                    Save Changes
+                </Button>
             </Group>
         </>
     )

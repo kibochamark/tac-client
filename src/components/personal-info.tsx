@@ -1,21 +1,18 @@
 "use client";
 import "@mantine/dates/styles.css";
 
+import { usePersistentForm } from "@/hooks/usePersistentForm";
 import {
   Button,
-  Container,
   Divider,
   Group,
-  Paper,
   Stack,
   Textarea,
-  TextInput,
-  Title,
+  TextInput
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { z } from "zod";
 import { Controller } from "react-hook-form";
-import { usePersistentForm } from "@/app/hooks/usePersistentForm";
+import { z } from "zod";
 
 // Zod schema
 const personalInfoSchema = z.object({
@@ -102,69 +99,64 @@ const PersonalInfo = () => {
   );
 
   return (
-    <Container size="lg">
-      <Paper shadow="sm" radius="md" p="xl">
-        <Group justify="space-between" >
-          <Title order={2} size="h3" c="gray.8">
-            Personal Information
-          </Title>
-        </Group>
+    <>
 
-        <Divider mb="xl" />
+      <Divider mb="xl" />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack gap="lg">
-            {/* Full Name + MRN */}
-            <Group grow>
-              {renderTextField(fieldConfigs[0])}
-              {renderTextField(fieldConfigs[1])}
-            </Group>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack gap="lg">
+          {/* Full Name + MRN */}
+          <Group grow>
+            {renderTextField(fieldConfigs[0])}
+            {renderTextField(fieldConfigs[1])}
+          </Group>
 
-            {/* Date of Birth + Phone */}
-            <Group grow>
-              <Controller
-                control={control}
-                name="dateOfBirth"
-                render={({ field }) => (
-                  <DatePickerInput
-                    label="Date of Birth"
-                    placeholder="Select date"
-                    value={field.value}
-                    onChange={field.onChange}
-                    error={errors.dateOfBirth?.message}
-                    required
-                  />
-                )}
-              />
-              {renderTextField(fieldConfigs[2])}
-            </Group>
-
-            {/* Insurance + Emergency Contact */}
-            <Group grow>
-              {renderTextField(fieldConfigs[3])}
-              {renderTextField(fieldConfigs[4])}
-            </Group>
-
-            {/* Address */}
-            <Textarea
-              label="Address"
-              placeholder="Enter full address"
-              {...register("address")}
-              error={errors.address?.message}
-              required
-              rows={3}
+          {/* Date of Birth + Phone */}
+          <Group grow>
+            <Controller
+              control={control}
+              name="dateOfBirth"
+              render={({ field }) => (
+                <DatePickerInput
+                  label="Date of Birth"
+                  placeholder="Select date"
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.dateOfBirth?.message}
+                  required
+                />
+              )}
             />
+            {renderTextField(fieldConfigs[2])}
+          </Group>
 
-            <Divider my="lg" />
-            <Group justify="flex-end">
-              <Button type="submit" color="blue">
-                Save Changes
-              </Button>
-            </Group>
-          </Stack>
-        </form>
-      </Paper>
-    </Container>
+          {/* Insurance + Emergency Contact */}
+          <Group grow>
+            {renderTextField(fieldConfigs[3])}
+            {renderTextField(fieldConfigs[4])}
+          </Group>
+
+          {/* Address */}
+          <Textarea
+            label="Address"
+            placeholder="Enter full address"
+            {...register("address")}
+            error={errors.address?.message}
+            required
+            rows={3}
+          />
+
+          <Group justify="flex-end">
+            <Button type="reset" variant="outline">Cancel</Button>
+            <Button type="submit">
+              Save Changes
+            </Button>
+          </Group>
+        </Stack>
+      </form>
+
+    </>
+
   );
 };
 
