@@ -1,8 +1,7 @@
 // components/SidebarFooter.tsx
-import React from 'react'
-import { NotificationButton } from './notification-button'
-import { UserProfile } from './user-profile'
+import { Paper, Stack } from '@mantine/core'
 import { SignOutButton } from './sign-out-button'
+import { UserProfile } from './user-profile'
 
 
 interface SidebarFooterProps {
@@ -25,25 +24,21 @@ export const SidebarFooter = ({
     }
 
     return (
-        <div className="p-2 border-t border-gray-200 space-y-1">
-            <NotificationButton
-                isCollapsed={isCollapsed}
-                isMobile={isMobile}
-                onClick={() => onNavigate('/dashboard/notifications')}
-            />
+        <Paper p="xs" withBorder radius={0} style={{ borderTop: '1px solid var(--mantine-color-gray-3)' }}>
+            <Stack gap="xs">
+                <UserProfile
+                    isCollapsed={isCollapsed}
+                    isMobile={isMobile}
+                    onClick={() => onNavigate('/dashboard/profile')}
+                    user={user}
+                />
 
-            <UserProfile
-                isCollapsed={isCollapsed}
-                isMobile={isMobile}
-                onClick={() => onNavigate('/dashboard/profile')}
-                user={user}
-            />
-
-            <SignOutButton
-                isCollapsed={isCollapsed}
-                isMobile={isMobile}
-                onSignOut={onSignOut}
-            />
-        </div>
+                <SignOutButton
+                    isCollapsed={isCollapsed}
+                    isMobile={isMobile}
+                    onSignOut={onSignOut}
+                />
+            </Stack>
+        </Paper>
     )
 }

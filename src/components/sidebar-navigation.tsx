@@ -1,5 +1,5 @@
 // components/SidebarNavigation.tsx
-import React from 'react'
+import { Stack } from '@mantine/core'
 import { BiCalendar, BiHome, BiUser } from 'react-icons/bi'
 import { BsActivity } from 'react-icons/bs'
 import { SidebarItem } from './sidebar-item'
@@ -32,7 +32,7 @@ export const SidebarNavigation = ({
     }
 
     return (
-        <nav className="flex-1 p-2 space-y-1">
+        <Stack gap="xs" p="xs" style={{ flex: 1 }}>
             {navigationItems.map(({ id, icon, title, path, count }) => (
                 <SidebarItem
                     key={id}
@@ -47,6 +47,6 @@ export const SidebarNavigation = ({
                     onClick={onNavigate}
                 />
             ))}
-        </nav>
+        </Stack>
     )
 }

@@ -1,5 +1,6 @@
 // components/SidebarHeader.tsx
 import React from 'react'
+import { Paper, Group, Text, ActionIcon, Avatar, Stack } from '@mantine/core'
 import { BiChevronLeft, BiChevronRight, BiX } from 'react-icons/bi'
 import { FaRegHeart } from 'react-icons/fa'
 
@@ -17,38 +18,64 @@ export const SidebarHeader = ({
     setIsMobileMenuOpen
 }: SidebarHeaderProps) => {
     return (
-        <div className='flex items-center p-2 justify-between bg-white shadow-sm relative'>
+        <Paper p="md" withBorder radius={0} style={{ position: 'relative' }}>
             {!isMobile && (
-                <button
+                <ActionIcon
                     onClick={toggleSidebar}
-                    className="absolute -right-1 top-8 w-6 h-6 bg-white border rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 z-10"
+                    variant="filled"
+                    color="gray"
+                    size="sm"
+                    radius="xl"
+                    style={{
+                        position: 'absolute',
+                        right: -12,
+                        top: 32,
+                        zIndex: 10,
+                    }}
                 >
-                    {isCollapsed ? <BiChevronRight className="w-4 h-4" /> : <BiChevronLeft className="w-4 h-4" />}
-                </button>
+                    {isCollapsed ? <BiChevronRight size={16} /> : <BiChevronLeft size={16} />}
+                </ActionIcon>
             )}
 
             {isMobile && (
-                <button
+                <ActionIcon
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="absolute right-2 top-2 w-8 h-8 bg-white border rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 z-10 lg:hidden"
+                    variant="filled"
+                    color="gray"
+                    size="sm"
+                    radius="xl"
+                    style={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        zIndex: 10,
+                    }}
                 >
-                    <BiX className="w-5 h-5" />
-                </button>
+                    <BiX size={20} />
+                </ActionIcon>
             )}
 
-            <div className="p-2 w-full">
-                <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                        <FaRegHeart />
-                    </div>
-                    {(!isCollapsed || isMobile) && (
-                        <div>
-                            <h1 className="font-semibold text-sm text-gray-900">TAC System</h1>
-                            <p className="text-xs text-gray-500">General Hospital</p>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
+            <Group gap="sm" align="center">
+                <Avatar
+                    size="md"
+                    radius="xl"
+                    gradient={{ from: 'purple', to: 'blue', deg: 45 }}
+                    color="purple"
+                >
+                    <FaRegHeart size={16} />
+                </Avatar>
+                
+                {(!isCollapsed || isMobile) && (
+                    <Stack gap={0}>
+                        <Text size="sm" fw={600} c="dark">
+                            TAC System
+                        </Text>
+                        <Text size="xs" c="dimmed">
+                            General Hospital
+                        </Text>
+                    </Stack>
+                )}
+            </Group>
+        </Paper>
     )
 }
