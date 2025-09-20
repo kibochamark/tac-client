@@ -10,6 +10,7 @@ import {
   Stack,
   Table,
   Tabs,
+  Text,
   TextInput
 } from '@mantine/core';
 import { useState } from 'react';
@@ -140,12 +141,13 @@ const Page = () => {
       <DashboardHeader
         username="Patient Census"
         description="Manage patient information and vascular access details"
+        notificationCount={2}
       />
 
-      <Stack p="md" gap="lg">
+      <Stack p={{ base: 'sm', sm: 'md' }} gap="lg">
         {/* Search + Filters */}
         <Paper withBorder p="md" radius="md">
-          <Group grow>
+          <Stack gap="md">
             <TextInput
               placeholder="Search by name or MRN..."
               leftSection={<BiSearch size={18} />}
@@ -153,37 +155,42 @@ const Page = () => {
               size="md"
               variant="filled"
             />
-
-            <Select
-              data={['All Clinics', 'Dialysis Center A', 'Dialysis Center B']}
-              defaultValue="All Clinics"
-              radius="xl"
-              size="md"
-              variant="filled"
-            />
-            <Select
-              data={['All Access Types', 'AVF', 'AVG']}
-              defaultValue="All Access Types"
-              radius="xl"
-              size="md"
-              variant="filled"
-            />
-            <Select
-              data={['All Statuses', 'Active', 'Overdue Evaluation']}
-              defaultValue="All Statuses"
-              radius="xl"
-              size="md"
-              variant="filled"
-            />
-          </Group>
+            
+            <Group grow>
+              <Select
+                data={['All Clinics', 'Dialysis Center A', 'Dialysis Center B']}
+                defaultValue="All Clinics"
+                radius="xl"
+                size="md"
+                variant="filled"
+              />
+              <Select
+                data={['All Access Types', 'AVF', 'AVG']}
+                defaultValue="All Access Types"
+                radius="xl"
+                size="md"
+                variant="filled"
+              />
+              <Select
+                data={['All Statuses', 'Active', 'Overdue Evaluation']}
+                defaultValue="All Statuses"
+                radius="xl"
+                size="md"
+                variant="filled"
+              />
+            </Group>
+          </Stack>
         </Paper>
 
         {/* Table */}
         <Paper radius="md" shadow="sm" p="md" withBorder>
-          <ScrollArea h={300} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-            <Table striped highlightOnHover p="md" verticalSpacing="sm">
+          <ScrollArea 
+            h={{ base: 400, sm: 300 }} 
+            onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+          >
+            <Table striped highlightOnHover verticalSpacing="sm" style={{ minWidth: 800 }}>
               <thead>
-                <tr className={`text-left bg-white z-20 p-4 ${scrolled ? 'sticky top-0' : ''}`}>
+                <tr className={`text-left bg-white z-20 ${scrolled ? 'sticky top-0' : ''}`}>
                   <th>Patient Name</th>
                   <th>MRN</th>
                   <th>Access Type</th>
@@ -197,23 +204,32 @@ const Page = () => {
               <tbody>
                 {rows.map((row) => (
                   <tr key={row.mrn}>
-                    <td>{row.name}</td>
-                    <td>{row.mrn}</td>
+                    <td>
+                      <Text size="sm" fw={500}>{row.name}</Text>
+                    </td>
+                    <td>
+                      <Text size="xs" c="dimmed">{row.mrn}</Text>
+                    </td>
                     <td>
                       <Badge color={row.access.color} variant="filled" size="sm">
                         {row.access.type}
                       </Badge>
                     </td>
-                    <td>{row.location}</td>
+                    <td>
+                      <Text size="sm">{row.location}</Text>
+                    </td>
                     <td>
                       <Badge color={row.status.color} size="sm">
                         {row.status.label}
                       </Badge>
                     </td>
-                    <td>{row.evaluation}</td>
-                    <td>{row.clinic}</td>
                     <td>
-
+                      <Text size="sm">{row.evaluation}</Text>
+                    </td>
+                    <td>
+                      <Text size="sm">{row.clinic}</Text>
+                    </td>
+                    <td>
                       <ActionIcon variant="light" color="blue" radius="xl" onClick={open}>
                         <BiEdit size={18} />
                       </ActionIcon>
@@ -223,7 +239,12 @@ const Page = () => {
               </tbody>
             </Table>
             <Modal
-              opened={opened} onClose={close} title="Patient Details" size="xl" radius="md"
+              opened={opened} 
+              onClose={close} 
+              title="Patient Details" 
+              size="xl"
+              radius="md"
+              fullScreen
             >
               {/* Modal content */}
               <Tabs variant="pills" defaultValue="Personal Information" >

@@ -1,5 +1,6 @@
 'use client'
 
+import { Container, Grid, Paper, Stack } from '@mantine/core'
 import VascularAccessChart from "../../components/access-chart"
 import CommonAccessEvents from "../../components/access-events"
 import AppointmentsTable from "../../components/appointments-table"
@@ -9,45 +10,50 @@ import QuickActions from "../../components/quick-actions"
 import StatsCards from "../../components/statscard"
 
 const DashboardPage = () => (
-  <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
+  <Container fluid p={0} style={{ minHeight: '100vh', overflow: 'hidden' }}>
+    <Stack gap={0} style={{ height: '100vh' }}>
+      <DashboardHeader username='Sarah' showGreeting={true} notificationCount={5} />
 
-    <div className="flex-1 flex flex-col">
-      <DashboardHeader username='Sarah' showGreeting={true} />
+      <Container 
+        fluid 
+        p={{ base: 'xs', sm: 'sm', md: 'md' }} 
+        style={{ flex: 1, overflow: 'auto' }}
+      >
+        <Stack gap="md">
+          <StatsCards />
 
-      <div className="flex-1 p-4 sm:p-6 overflow-auto">
-        <StatsCards />
+          {/* Chart and Quick Actions */}
+          <Grid>
+            <Grid.Col span={{ base: 12, lg: 8 }}>
+              <Paper radius="md" shadow="sm" p={{ base: 'sm', sm: 'md' }}>
+                <VascularAccessChart />
+              </Paper>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, lg: 4 }}>
+              <QuickActions />
+            </Grid.Col>
+          </Grid>
 
-        {/* Chart and Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow">
-              <VascularAccessChart />
-            </div>
-          </div>
-          <div>
-            <QuickActions />
-          </div>
-        </div>
+          {/* Events and Doctors */}
+          <Grid>
+            <Grid.Col span={{ base: 12, lg: 8 }}>
+              <Paper radius="xl" shadow="sm" p={{ base: 'sm', sm: 'md' }}>
+                <CommonAccessEvents />
+              </Paper>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, lg: 4 }}>
+              <DoctorsList />
+            </Grid.Col>
+          </Grid>
 
-        {/* Events and Doctors */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow ">
-              <CommonAccessEvents />
-            </div>
-          </div>
-          <div>
-            <DoctorsList />
-          </div>
-        </div>
-
-        {/* Appointments */}
-        <div className="overflow-x-auto bg-white rounded-2xl shadow">
-          <AppointmentsTable />
-        </div>
-      </div>
-    </div>
-  </div>
+          {/* Appointments */}
+          <Paper radius="xl" shadow="sm" p={{ base: 'sm', sm: 'md' }}>
+            <AppointmentsTable />
+          </Paper>
+        </Stack>
+      </Container>
+    </Stack>
+  </Container>
 )
 
 export default DashboardPage
