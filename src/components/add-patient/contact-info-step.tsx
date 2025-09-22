@@ -15,7 +15,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
       <Title order={3} c="dimmed">Contact Information</Title>
       
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Phone Number"
             placeholder="Enter phone number"
@@ -24,7 +24,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
             error={errors.phoneNumber?.message}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Email Address"
             placeholder="Enter email address"
@@ -45,7 +45,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
       />
 
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Emergency Contact Name"
             placeholder="Enter emergency contact name"
@@ -53,7 +53,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
             error={errors.emergencyContactName?.message}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Emergency Contact Phone"
             placeholder="Enter emergency contact phone"
@@ -64,7 +64,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
       </Grid>
 
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Insurance Provider"
             placeholder="Enter insurance provider"
@@ -72,7 +72,7 @@ const ContactInfoStep: React.FC<ContactInfoStepProps> = ({ form }) => {
             error={errors.insuranceProvider?.message}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Insurance Number"
             placeholder="Enter insurance number"

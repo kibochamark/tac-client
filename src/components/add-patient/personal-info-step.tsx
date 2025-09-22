@@ -13,10 +13,10 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
 
     return (
         <Stack gap="lg">
-            <Title order={3} c="dimmed">Personal Information</Title>
+            <Title order={3} c={"dimmed"}>Personal Information</Title>
 
             <Grid>
-                <Grid.Col span={6}>
+                <Grid.Col span={{ base: 12, sm: 6 }}>
                     <TextInput
                         label="First Name"
                         placeholder="Enter first name"
@@ -25,7 +25,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
                         error={errors.firstName?.message}
                     />
                 </Grid.Col>
-                <Grid.Col span={6}>
+                <Grid.Col span={{ base: 12, sm: 6 }}>
                     <TextInput
                         label="Last Name"
                         placeholder="Enter last name"
@@ -37,7 +37,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
             </Grid>
 
                 <Grid>
-                    <Grid.Col span={6}>
+                    <Grid.Col span={{ base: 12, sm: 6 }}>
                         <Select
                             label="Sex"
                             placeholder="Select sex"
@@ -48,7 +48,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
                             onChange={(value: string | null) => setValue('sex', value as SexValue)}
                         />
                     </Grid.Col>
-                    <Grid.Col span={6}>
+                    <Grid.Col span={{ base: 12, sm: 6 }}>
                         <Select
                             label="Marital Status"
                             placeholder="Select marital status"
@@ -61,7 +61,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
                 </Grid>
 
             <Grid>
-                <Grid.Col span={6}>
+                <Grid.Col span={{ base: 12, sm: 6 }}>
                     <DatePickerInput
                         label="Date of Birth"
                         placeholder="Select date of birth"
@@ -71,7 +71,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
                         error={errors.dateOfBirth?.message}
                     />
                 </Grid.Col>
-                <Grid.Col span={6}>
+                <Grid.Col span={{ base: 12, sm: 6 }}>
                     <TextInput
                         label="National ID / SSN"
                         placeholder="Enter national ID or SSN"
@@ -83,7 +83,7 @@ const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ form }) => {
             </Grid>
 
                 <Grid>
-                    <Grid.Col span={6}>
+                    <Grid.Col span={{ base: 12, sm: 6 }}>
                         <Select
                             label="Blood Group"
                             placeholder="Select blood group"

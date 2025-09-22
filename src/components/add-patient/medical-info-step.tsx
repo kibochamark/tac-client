@@ -16,7 +16,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
       <Title order={3} c="dimmed">Medical Information</Title>
       
         <Grid>
-          <Grid.Col span={6}>
+          <Grid.Col span={{ base: 12, sm: 6 }}>
             <Select
               label="Access Type"
               placeholder="Select access type"
@@ -27,7 +27,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
               onChange={(value) => setValue('accessType', value as AccessTypeValue)}
             />
           </Grid.Col>
-          <Grid.Col span={6}>
+          <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               label="Access Location"
               placeholder="Enter access location"
@@ -39,7 +39,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
         </Grid>
 
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <Select
             label="Access Maturity"
             placeholder="Select access maturity"
@@ -49,7 +49,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
             onChange={(value) => setValue('accessMaturity', value as AccessMaturityValue)}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <Stack gap="xs">
             <label style={{ fontSize: '14px', fontWeight: 500 }}>Functional Status</label>
             <Radio.Group
@@ -72,7 +72,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
       </Grid>
 
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TextInput
             label="Surgeon"
             placeholder="Enter surgeon name"
@@ -81,7 +81,7 @@ const MedicalInfoStep: React.FC<MedicalInfoStepProps> = ({ form }) => {
             error={errors.surgeon?.message}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <Select
             label="Clinic"
             placeholder="Select clinic"

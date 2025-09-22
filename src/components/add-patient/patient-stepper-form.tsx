@@ -1,6 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Alert, Button, Container, Group, Stepper, Title } from '@mantine/core'
+import { Alert, Button, Group, Stepper } from '@mantine/core'
 import { AlertCircle } from 'lucide-react'
 import { useState } from 'react'
 import ContactInfoStep from './contact-info-step'
@@ -156,11 +156,7 @@ const PatientStepperForm: React.FC = () => {
     }
 
     return (
-        <Container size="lg" py="xl">
-            <Title order={2} mb="xl" ta="center">
-                Add New Patient
-            </Title>
-
+        <div>
             {submitError && (
                 <Alert
                     icon={<AlertCircle size={16} />}
@@ -199,7 +195,7 @@ const PatientStepperForm: React.FC = () => {
                     </Button>
                 </Group>
             )}
-        </Container>
+        </div>
     )
 }
 
