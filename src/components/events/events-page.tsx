@@ -121,12 +121,13 @@ const EventsPage = () => {
       <DashboardHeader
         username="Access Events"
         description="Monitor and manage vascular access events and complications"
+        notificationCount={3}
       />
 
       {/* Stats cards */}
       <EventList />
 
-      <Stack p="md" gap="lg">
+      <Stack p={{ base: 'sm', sm: 'md' }} gap="lg">
         {/* Filters */}
         <EventFilters />
 
