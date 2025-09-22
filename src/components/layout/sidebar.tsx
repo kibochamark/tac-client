@@ -3,10 +3,12 @@
 
 import React, { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { Paper, Stack, Box } from '@mantine/core'
 import { MobileMenuToggle } from '../mobile-menu-toggle'
 import { SidebarHeader } from '../sidebar-header'
 import { SidebarNavigation } from '../sidebar-navigation'
 import { AddPatientButton } from '../add-patient-button'
+import { NotificationButton } from '../notification-button'
 import { SidebarFooter } from '../sidebar-footer'
 import { useSidebar } from '@/hooks/useSidebar'
 import { handleNavigation } from '@/lib/utils'
@@ -54,44 +56,61 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" />
       )}
 
-      <div
+      <Paper
         ref={sidebarRef}
-        className={`
-          ${isMobile ? 'fixed' : 'relative'}
-          h-screen bg-gray-50 border-r border-gray-200 flex flex-col transition-all duration-300 z-50
-          ${isMobile
-            ? `${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-64`
-            : `${isCollapsed ? 'w-16' : 'w-64'}`
-          }
-        `}
+        style={{
+          position: isMobile ? 'fixed' : 'relative',
+          height: '100vh',
+          width: isMobile ? '256px' : isCollapsed ? '64px' : '256px',
+          transform: isMobile ? (isMobileMenuOpen ? 'translateX(0)' : 'translateX(-100%)') : 'none',
+          transition: 'all 0.3s ease',
+          zIndex: 50,
+        }}
+        radius={0}
+        withBorder
+        className="flex flex-col"
       >
-        <SidebarHeader
-          isCollapsed={isCollapsed}
-          isMobile={isMobile}
-          toggleSidebar={toggleSidebar}
-          setIsMobileMenuOpen={setIsMobileMenuOpen}
-        />
+        <Stack gap={0} style={{ height: '100%' }}>
+          <SidebarHeader
+            isCollapsed={isCollapsed}
+            isMobile={isMobile}
+            toggleSidebar={toggleSidebar}
+            setIsMobileMenuOpen={setIsMobileMenuOpen}
+          />
 
-        <SidebarNavigation
-          pathname={pathname}
-          isCollapsed={isCollapsed}
-          isMobile={isMobile}
-          onNavigate={onNavigate}
-        />
+          <Box style={{ flex: 1 }}>
+            <SidebarNavigation
+              pathname={pathname}
+              isCollapsed={isCollapsed}
+              isMobile={isMobile}
+              onNavigate={onNavigate}
+            />
+          </Box>
 
-        <AddPatientButton
-          isCollapsed={isCollapsed}
-          isMobile={isMobile}
-          onClick={() => onNavigate('/dashboard/patients/add')}
-        />
+          <Stack gap="xs" p="xs">
+            <AddPatientButton
+              isCollapsed={isCollapsed}
+              isMobile={isMobile}
+              onClick={() => onNavigate('/dashboard/patients/add')}
+            />
 
-        <SidebarFooter
-          isCollapsed={isCollapsed}
-          isMobile={isMobile}
-          onNavigate={onNavigate}
-          onSignOut={onSignOut}
-        />
-      </div>
+            <NotificationButton
+              isCollapsed={isCollapsed}
+              isMobile={isMobile}
+              onClick={() => onNavigate('/dashboard/notifications')}
+              hasNotifications={true}
+              count={5}
+            />
+          </Stack>
+
+          <SidebarFooter
+            isCollapsed={isCollapsed}
+            isMobile={isMobile}
+            onNavigate={onNavigate}
+            onSignOut={onSignOut}
+          />
+        </Stack>
+      </Paper>
     </>
   )
 }

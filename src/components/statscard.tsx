@@ -67,7 +67,7 @@ const StatsCards = () => {
     ];
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
             {stats.map((stat, index) => {
                 const Icon = stat.icon;
 
@@ -75,38 +75,37 @@ const StatsCards = () => {
                     <div
                         key={index}
                         className={`
-                            group bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-200 
+                            group bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-3 sm:p-4 lg:p-6 transition-all duration-200 
                             hover:shadow-lg hover:border-gray-300 cursor-pointer ${stat.hoverBg}
                         `}
                     >
                         {/* Header with title and icon */}
-                        <div className=" flex items-center justify-between mb-4">
-                            <div >
-                            <h3 className={`text-sm font-medium ${stat.titleColor} leading-tight`}>
-                                {stat.title}
-                            </h3>
+                        <div className="flex items-start justify-between mb-3 sm:mb-4">
+                            <div className="flex-1 min-w-0">
+                                <h3 className={`text-xs sm:text-sm font-medium ${stat.titleColor} leading-tight mb-1`}>
+                                    {stat.title}
+                                </h3>
 
-                            <span className={`text-4xl font-bold ${stat.valueColor} block leading-none`}>
-                                {stat.value}
-                            </span>
-                            <p className={`text-sm font-medium ${stat.subtitleColor} mb-3`}>
-                                {stat.subtitle}
-                            </p>
-                            {/* Change indicator */}
-                            <div className="flex items-center">
-                                <span className={`text-sm font-medium ${stat.changeColor} flex items-center`}>
-                                    <span className="mr-1">
-                                        {stat.changeType === 'increase' ? '↗' : '↙'}
-                                    </span>
-                                    {stat.change}
+                                <span className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${stat.valueColor} block leading-none mb-1`}>
+                                    {stat.value}
                                 </span>
+                                <p className={`text-xs sm:text-sm font-medium ${stat.subtitleColor} mb-2 sm:mb-3`}>
+                                    {stat.subtitle}
+                                </p>
+                                {/* Change indicator */}
+                                <div className="flex items-center">
+                                    <span className={`text-xs sm:text-sm font-medium ${stat.changeColor} flex items-center`}>
+                                        <span className="mr-1">
+                                            {stat.changeType === 'increase' ? '↗' : '↙'}
+                                        </span>
+                                        <span className="truncate">{stat.change}</span>
+                                    </span>
+                                </div>
                             </div>
+                            <div className={`${stat.iconBg} p-1.5 sm:p-2 rounded-lg shadow-md flex-shrink-0 ml-2 sm:ml-3`}>
+                                <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${stat.iconColor}`} />
                             </div>
-                        <div className={`${stat.iconBg} p-2 rounded-lg shadow-md flex-shrink-0 ml-3`}>
-                            <Icon className={`w-5 h-5 ${stat.iconColor}`} />
                         </div>
-                        </div>
-
                     </div>
                 );
             })}
