@@ -10,7 +10,7 @@ const data = [
 ]
 
 const VascularAccessChart = () => (
-    <div className="bg-white rounded-lg shadow-sm hover:shadow-xl border border-gray-200 p-2 sm:p-4">
+    <div className="bg-white rounded-lg p-2 sm:p-4">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
             <div className="flex items-center space-x-2">

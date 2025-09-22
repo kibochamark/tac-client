@@ -23,6 +23,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
   userRole = 'nurse'
 }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [viewMode, setViewMode] = useState<'month' | 'week'>('month')
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
   const [formOpened, { open: openForm, close: closeForm }] = useDisclosure(false)
@@ -94,7 +95,8 @@ const CalendarView: React.FC<CalendarViewProps> = ({
     onAppointmentClick?.(appointment)
   }
 
-  const handleCreateAppointment = () => {
+  const handleCreateAppointment = (clickedDate?: Date) => {
+    setSelectedDate(clickedDate || null)
     openForm()
     onCreateAppointment?.()
   }
@@ -146,6 +148,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
             currentDate={currentDate}
             appointments={appointments}
             onAppointmentClick={handleAppointmentClick}
+            onCreateAppointment={handleCreateAppointment}
           />
         )}
       </Paper>
@@ -164,6 +167,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
         onSubmit={handleFormSubmit}
         userRole={userRole}
         conflictWarning={conflictWarning}
+        selectedDate={selectedDate || currentDate}
       />
     </Stack>
   )

@@ -47,7 +47,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   return (
     // <Container fluid px={{ base: 'md', sm: 'md', lg: 'sm' }} py={{ base: 'md', sm: 'lg' }}>
       <Group justify="space-between" align="flex-start" gap="md" wrap="nowrap">
-        {/* Left Section */}
+            {/* Left Section */}
         <Box style={{ flex: 1, minWidth: 0 }}>
           <Stack gap="xs">
             <Text
@@ -83,10 +83,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             </Text>
             
             <Text size="xs" c="dimmed" style={{ lineHeight: 1.6 }} hiddenFrom="sm">
-              {paragraph}
+                  {paragraph}
             </Text>
 
-            {/* Mobile-only quick stats */}
+                {/* Mobile-only quick stats */}
             <Group gap="lg" visibleFrom="sm" hidden>
               <Group gap="xs">
                 <Box w={8} h={8} bg="green" style={{ borderRadius: '50%' }} />
@@ -129,7 +129,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             gradient={{ from: 'purple', to: 'blue', deg: 45 }}
             color="purple"
           >
-            {username.charAt(0).toUpperCase()}
+                {username.charAt(0).toUpperCase()}
           </Avatar>
         </Group>
       </Group>

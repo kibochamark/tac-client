@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
     Alert,
     Button,
@@ -19,6 +19,7 @@ interface AppointmentFormProps {
     onSubmit: (data: AppointmentFormData) => void
     userRole?: UserRole
     conflictWarning?: string | null
+    selectedDate: Date
 }
 
 const AppointmentForm: React.FC<AppointmentFormProps> = ({
@@ -26,7 +27,8 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     onClose,
     onSubmit,
     userRole = 'nurse',
-    conflictWarning
+    conflictWarning,
+    selectedDate
 }) => {
     // Sample doctors data
     const doctors = [
@@ -47,10 +49,18 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     const [formData, setFormData] = useState<AppointmentFormData>({
         patientName: '',
         doctorName: '',
-        date: new Date(),
+        date: selectedDate,
         time: '',
         reason: ''
     })
+
+    // Update form data when selectedDate changes
+    React.useEffect(() => {
+        setFormData(prev => ({
+            ...prev,
+            date: selectedDate
+        }))
+    }, [selectedDate])
 
     const handleSubmit = () => {
         if (!formData.patientName || !formData.doctorName || !formData.time || !formData.reason) {
@@ -61,7 +71,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
         setFormData({
             patientName: '',
             doctorName: '',
-            date: new Date(),
+            date: selectedDate,
             time: '',
             reason: ''
         })
@@ -72,7 +82,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
         setFormData({
             patientName: '',
             doctorName: '',
-            date: new Date(),
+            date: selectedDate,
             time: '',
             reason: ''
         })

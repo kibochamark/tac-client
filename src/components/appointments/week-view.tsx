@@ -6,12 +6,14 @@ interface WeekViewProps {
   currentDate: Date
   appointments: Appointment[]
   onAppointmentClick: (appointment: Appointment) => void
+  onCreateAppointment?: (selectedDate?: Date) => void
 }
 
 const WeekView: React.FC<WeekViewProps> = ({
   currentDate,
   appointments,
-  onAppointmentClick
+  onAppointmentClick,
+  onCreateAppointment
 }) => {
   const getWeekDays = (date: Date) => {
     const startOfWeek = new Date(date)
@@ -41,7 +43,15 @@ const WeekView: React.FC<WeekViewProps> = ({
     <Grid>
       {weekDays.map((day, index) => (
         <Grid.Col key={index} span={12 / 7}>
-          <Paper p="md" h={200} style={{ border: '1px solid #e9ecef' }}>
+          <Paper 
+            p="md" 
+            h={200} 
+            style={{ 
+              border: '1px solid #e9ecef',
+              cursor: 'pointer'
+            }}
+            onClick={() => onCreateAppointment?.(day)}
+          >
             <Text ta="center" fw={600} size="sm" mb="sm">
               {dayNames[index]} {day.getDate()}
             </Text>

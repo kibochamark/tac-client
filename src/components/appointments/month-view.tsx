@@ -6,7 +6,7 @@ interface MonthViewProps {
   currentDate: Date
   appointments: Appointment[]
   onAppointmentClick: (appointment: Appointment) => void
-  onCreateAppointment: () => void
+  onCreateAppointment: (selectedDate?: Date) => void
 }
 
 const MonthView: React.FC<MonthViewProps> = ({
@@ -67,7 +67,7 @@ const MonthView: React.FC<MonthViewProps> = ({
               cursor: day ? 'pointer' : 'default',
               opacity: day ? 1 : 0.3
             }}
-            onClick={() => day && onCreateAppointment()}
+            onClick={() => day && onCreateAppointment(day)}
           >
             {day && (
               <>

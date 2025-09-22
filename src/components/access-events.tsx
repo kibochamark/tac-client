@@ -53,7 +53,7 @@ const CommonAccessEvents = () => {
     ]
 
     return (
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-3 sm:p-4 my-4 sm:my-6">
+        <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 my-4 sm:my-6">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4 sm:mb-6">
                 <div className="flex items-center space-x-2">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-300 to-red-400 rounded-full flex items-center justify-center">

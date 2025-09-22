@@ -12,7 +12,7 @@ const appointments = [
 ]
 
 const AppointmentsTable = () => (
-  <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+  <div className="bg-white rounded-lg">
     {/* Header */}
     <div className="p-3 sm:p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
       <div className="flex items-center space-x-2">
