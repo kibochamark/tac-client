@@ -1,6 +1,8 @@
 'use client';
 
+import { ActionIcon, Avatar, Box, Group, Stack, Text } from '@mantine/core';
 import React from 'react';
+import { BiBell } from 'react-icons/bi';
 
 interface DashboardHeaderProps {
   username: string;
@@ -8,6 +10,7 @@ interface DashboardHeaderProps {
   time?: string;
   description?: string;
   showGreeting?: boolean;
+  notificationCount?: number;
 }
 
 const getGreeting = () => {
@@ -23,6 +26,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   time,
   description,
   showGreeting = false,
+  
 }) => {
   const greeting = `${getGreeting()} ${username}`;
 
@@ -41,58 +45,95 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     description || `Here's what's happening with your patients today`;
 
   return (
-    <>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="py-4 sm:py-6">
-          <div className="flex items-start justify-between gap-4">
-            {/* Left Section */}
-            <div className="flex items-start space-x-3 sm:space-x-4 min-w-0 flex-1">
-              <div className="min-w-0 flex-1 -mt-2">
-                {showGreeting ? (
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1 py-2">
-                    {greeting}
-                  </h1>
-                ) : (
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-1 py-2">
-                    {username}
-                  </h1>
-                )}
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {paragraph}
-                </p>
+    // <Container fluid px={{ base: 'md', sm: 'md', lg: 'sm' }} py={{ base: 'md', sm: 'lg' }}>
+      <Group justify="space-between" align="flex-start" gap="md" wrap="nowrap">
+        {/* Left Section */}
+        <Box style={{ flex: 1, minWidth: 0 }}>
+          <Stack gap="xs">
+            <Text
+              size="xl"
+              fw={700}
+              style={{
+                background: 'linear-gradient(90deg, #1a1a1a 0%, #4a4a4a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+              visibleFrom="sm"
+            >
+              {showGreeting ? greeting : username}
+            </Text>
+            
+            <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }} visibleFrom="sm">
+              {paragraph}
+            </Text>
+            
+            <Text
+              size="lg"
+              fw={700}
+              style={{
+                background: 'linear-gradient(90deg, #1a1a1a 0%, #4a4a4a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+              hiddenFrom="sm"
+            >
+              {showGreeting ? greeting : username}
+            </Text>
+            
+            <Text size="xs" c="dimmed" style={{ lineHeight: 1.6 }} hiddenFrom="sm">
+              {paragraph}
+            </Text>
 
-                {/* Mobile-only quick stats */}
-                <div className="mt-3 flex items-center space-x-4 text-xs text-gray-500 sm:hidden">
-                  <span className="flex items-center">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                    12 Active
-                  </span>
-                  <span className="flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-1"></div>
-                    3 Pending
-                  </span>
-                </div>
-              </div>
-            </div>
+            {/* Mobile-only quick stats */}
+            <Group gap="lg" visibleFrom="sm" hidden>
+              <Group gap="xs">
+                <Box w={8} h={8} bg="green" style={{ borderRadius: '50%' }} />
+                <Text size="xs" c="dimmed">12 Active</Text>
+              </Group>
+              <Group gap="xs">
+                <Box w={8} h={8} bg="orange" style={{ borderRadius: '50%' }} />
+                <Text size="xs" c="dimmed">3 Pending</Text>
+              </Group>
+            </Group>
+          </Stack>
+        </Box>
 
-            {/* Right Section - Hidden on mobile */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <div className="text-right">
-                <h3 className="text-sm font-medium text-gray-900">{currentDate}</h3>
-                <p className="text-xs text-gray-500">{currentTime}</p>
-              </div>
+        {/* Right Section */}
+        <Group gap="md" align="center" hiddenFrom="lg">
+          {/* Mobile notification button */}
+          <ActionIcon
+            variant="subtle"
+            color="gray"
+            size="lg"
+            radius="xl"
+          >
+            <BiBell size={20} />
+          </ActionIcon>
+        </Group>
 
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold shadow-lg">
-                {username.charAt(0).toUpperCase()}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Group gap="md" align="center" visibleFrom="lg">
+          <Stack gap={0} align="flex-end">
+            <Text size="sm" fw={500} c="dark">
+              {currentDate}
+            </Text>
+            <Text size="xs" c="dimmed">
+              {currentTime}
+            </Text>
+          </Stack>
 
-      {/* Mobile Bottom Border Gradient */}
-      <div className="md:hidden h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-    </>
+          <Avatar
+            size="lg"
+            radius="xl"
+            gradient={{ from: 'purple', to: 'blue', deg: 45 }}
+            color="purple"
+          >
+            {username.charAt(0).toUpperCase()}
+          </Avatar>
+        </Group>
+      </Group>
+    // </Container>
   );
 };
 
