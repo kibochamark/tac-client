@@ -1,14 +1,15 @@
 // components/Sidebar.tsx (Main Component)
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Paper, Stack, Box } from '@mantine/core'
-import { MobileMenuToggle } from '../mobile-menu-toggle'
+import { MobileMenuToggle } from '../common'
 import { SidebarHeader } from '../sidebar-header'
 import { SidebarNavigation } from '../sidebar-navigation'
 import { AddPatientButton } from '../add-patient-button'
 import { NotificationButton } from '../notification-button'
+import { NotificationsModal } from '../notifications-modal'
 import { SidebarFooter } from '../sidebar-footer'
 import { useSidebar } from '@/hooks/useSidebar'
 import { handleNavigation } from '@/lib/utils'
@@ -23,6 +24,8 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
   const sidebarRef = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const pathname = usePathname()
+  const [isNotificationsModalOpen, setIsNotificationsModalOpen] = useState(false)
+  const [isUserProfileModalOpen, setIsUserProfileModalOpen] = useState(false)
 
   useEffect(() => {
     if (isMobileMenuOpen && isMobile) {
@@ -97,7 +100,7 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
             <NotificationButton
               isCollapsed={isCollapsed}
               isMobile={isMobile}
-              onClick={() => onNavigate('/dashboard/notifications')}
+              onOpenModal={() => setIsNotificationsModalOpen(true)}
               hasNotifications={true}
               count={5}
             />
@@ -106,11 +109,17 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
           <SidebarFooter
             isCollapsed={isCollapsed}
             isMobile={isMobile}
-            onNavigate={onNavigate}
             onSignOut={onSignOut}
+            isUserProfileModalOpen={isUserProfileModalOpen}
+            setIsUserProfileModalOpen={setIsUserProfileModalOpen}
           />
         </Stack>
       </Paper>
+
+      <NotificationsModal
+        opened={isNotificationsModalOpen}
+        onClose={() => setIsNotificationsModalOpen(false)}
+      />
     </>
   )
 }

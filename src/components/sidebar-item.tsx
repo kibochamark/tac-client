@@ -2,7 +2,7 @@
 import React from 'react'
 import type { IconType } from 'react-icons'
 import { Button, Text } from '@mantine/core'
-import { Badge, ActiveBadge } from './badge'
+import { Badge, ActiveBadge } from './common'
 
 interface SidebarItemProps {
     id: string
@@ -30,9 +30,9 @@ export const SidebarItem = ({
             leftSection={<Icon size={20} />}
             rightSection={(!isCollapsed || isMobile) && count ? (
                 isActive ? (
-                    <ActiveBadge count={count} />
+                    <ActiveBadge isActive={isActive} />
                 ) : (
-                    <Badge count={count} variant="active" />
+                    <Badge count={count} variant="default" />
                 )
             ) : undefined}
             title={(isCollapsed && !isMobile) ? title : undefined}

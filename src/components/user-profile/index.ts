@@ -1,0 +1,5 @@
+export { ProfileHeader } from './profile-header'
+export { ProfileDetails } from './profile-details'
+export { ProfilePermissions } from './profile-permissions'
+export { ProfileActions } from './profile-actions'
+export * from './types'

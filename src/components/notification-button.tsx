@@ -2,12 +2,12 @@
 import React from 'react'
 import { Button, Text, Box } from '@mantine/core'
 import { BiBell } from 'react-icons/bi'
-import { Badge } from './badge'
+import { Badge } from './common'
 
 interface NotificationButtonProps {
     isCollapsed: boolean
     isMobile: boolean
-    onClick: () => void
+    onOpenModal: () => void
     hasNotifications?: boolean
     count?: number
 }
@@ -15,13 +15,13 @@ interface NotificationButtonProps {
 export const NotificationButton = ({
     isCollapsed,
     isMobile,
-    onClick,
+    onOpenModal,
     hasNotifications = true,
     count
 }: NotificationButtonProps) => {
     return (
         <Button
-            onClick={onClick}
+            onClick={onOpenModal}
             variant="subtle"
             color="gray"
             size="md"
