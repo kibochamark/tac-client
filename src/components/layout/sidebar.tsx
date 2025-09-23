@@ -4,7 +4,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Paper, Stack, Box } from '@mantine/core'
-import { MobileMenuToggle } from '../common'
 import { SidebarHeader } from '../sidebar-header'
 import { SidebarNavigation } from '../sidebar-navigation'
 import { AddPatientButton } from '../add-patient-button'
@@ -13,6 +12,7 @@ import { NotificationsModal } from '../notifications-modal'
 import { SidebarFooter } from '../sidebar-footer'
 import { useSidebar } from '@/hooks/useSidebar'
 import { handleNavigation } from '@/lib/utils'
+import { MobileMenuToggle } from '../mobile-menu-toggle'
 
 interface SidebarProps {
   isMobileMenuOpen: boolean

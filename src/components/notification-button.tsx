@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button, Text, Box } from '@mantine/core'
 import { BiBell } from 'react-icons/bi'
-import { Badge } from './common'
+import Badge from './common/badge'
 
 interface NotificationButtonProps {
     isCollapsed: boolean

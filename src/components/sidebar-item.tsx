@@ -2,7 +2,7 @@
 import React from 'react'
 import type { IconType } from 'react-icons'
 import { Button, Text } from '@mantine/core'
-import { Badge, ActiveBadge } from './common'
+import Badge, { ActiveBadge } from './common/badge'
 
 interface SidebarItemProps {
     id: string
