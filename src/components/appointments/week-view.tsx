@@ -44,18 +44,17 @@ const WeekView: React.FC<WeekViewProps> = ({
       {weekDays.map((day, index) => (
         <Grid.Col key={index} span={12 / 7}>
           <Paper 
-            p="md" 
-            h={200} 
+           h={100}
             style={{ 
               border: '1px solid #e9ecef',
               cursor: 'pointer'
             }}
             onClick={() => onCreateAppointment?.(day)}
           >
-            <Text ta="center" fw={600} size="sm" mb="sm">
+            <Text ta="center" fw={600} size="sm">
               {dayNames[index]} {day.getDate()}
             </Text>
-            <Stack gap={4}>
+            <Stack gap={2}>
               {getAppointmentsForDate(day).map(appointment => (
                 <Badge
                   key={appointment.id}

@@ -2,6 +2,7 @@
 import { Paper, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import CalendarHeader from './calendar-header'
 import MonthView from './month-view'
 import WeekView from './week-view'
@@ -118,7 +119,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
       duration: 60
     }
 
-    console.log('New appointment created:', newAppointment)
+    toast.success('Appointment created successfully!')
     // Here you would typically add the appointment to your state or make an API call
   }
 

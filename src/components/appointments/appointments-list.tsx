@@ -1,12 +1,13 @@
 'use client'
 import {
-  ActionIcon,
   Badge,
   Button,
   Flex,
   Group,
   Modal,
   Paper,
+  rem,
+  ScrollArea,
   Select,
   Stack,
   Table,
@@ -18,7 +19,6 @@ import {
   Calendar,
   Edit,
   Eye,
-  Filter,
   Search,
   Trash2
 } from 'lucide-react'
@@ -44,6 +44,7 @@ const AppointmentsList: React.FC<AppointmentsListProps> = ({
   const [statusFilter, setStatusFilter] = useState<string | null>(null)
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
   const [opened, { open, close }] = useDisclosure(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -56,11 +57,11 @@ const AppointmentsList: React.FC<AppointmentsListProps> = ({
 
   const filteredAppointments = appointments.filter(appointment => {
     const matchesSearch = appointment.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appointment.doctorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appointment.reason.toLowerCase().includes(searchTerm.toLowerCase())
-    
+      appointment.doctorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      appointment.reason.toLowerCase().includes(searchTerm.toLowerCase())
+
     const matchesStatus = !statusFilter || appointment.status === statusFilter
-    
+
     return matchesSearch && matchesStatus
   })
 
@@ -75,118 +76,116 @@ const AppointmentsList: React.FC<AppointmentsListProps> = ({
   }
 
   const handleDelete = (appointmentId: string) => {
-    if (confirm('Are you sure you want to delete this appointment?')) {
       onDelete?.(appointmentId)
-    }
   }
 
   return (
-    <Stack>
-      {/* Filters */}
-      <Paper p="md" withBorder>
-        <Group justify="space-between" mb="md">
-          <Text size="lg" fw={600}>Appointments</Text>
-          <Group>
+    <Stack gap="lg">
+      {/* Search + Filters */}
+      <Paper withBorder p="md" radius="md">
+        <Stack gap="md">
+          <div className='flex flex-col md:flex-row gap-2'>
             <TextInput
               placeholder="Search appointments..."
-              leftSection={<Search size={16} />}
+              leftSection={<Search size={18} />}
+              radius="xl"
+              size="xs"
+              variant="filled"
+              className="md:grow"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              style={{ width: 300 }}
             />
+
             <Select
-              placeholder="Filter by status"
               data={[
                 { value: 'scheduled', label: 'Scheduled' },
                 { value: 'completed', label: 'Completed' },
                 { value: 'cancelled', label: 'Cancelled' }
               ]}
+              placeholder="All Statuses"
+              radius="xl"
+              size="xs"
+              variant="filled"
+              className="md:grow"
               value={statusFilter}
               onChange={setStatusFilter}
               clearable
-              leftSection={<Filter size={16} />}
             />
-          </Group>
-        </Group>
+          </div>
+        </Stack>
+      </Paper>
 
-        {/* Appointments Table */}
-        <Table striped highlightOnHover>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>Patient</Table.Th>
-              <Table.Th>Doctor</Table.Th>
-              <Table.Th>Date & Time</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Reason</Table.Th>
-              <Table.Th>Actions</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {filteredAppointments.map((appointment) => (
-              <Table.Tr key={appointment.id}>
-                <Table.Td>
-                  <Text fw={500}>{appointment.patientName}</Text>
-                </Table.Td>
-                <Table.Td>
-                  <Text>{appointment.doctorName}</Text>
-                </Table.Td>
-                <Table.Td>
-                  <Group gap="xs">
-                    <Calendar size={14} />
-                    <Text size="sm">
-                      {appointment.date.toLocaleDateString()} at {appointment.time}
-                    </Text>
-                  </Group>
-                </Table.Td>
-                <Table.Td>
-                  <Badge color={getStatusColor(appointment.status)} variant="light">
-                    {appointment.status}
-                  </Badge>
-                </Table.Td>
-                <Table.Td>
-                  <Text size="sm" c="dimmed" lineClamp={1}>
-                    {appointment.reason}
-                  </Text>
-                </Table.Td>
-                <Table.Td>
-                  <Group gap="xs">
-                    <ActionIcon
-                      variant="light"
-                      color="blue"
-                      onClick={() => handleView(appointment)}
-                    >
-                      <Eye size={16} />
-                    </ActionIcon>
-                    {userRole === 'nurse' && (
-                      <>
-                        <ActionIcon
-                          variant="light"
-                          color="yellow"
-                          onClick={() => handleEdit(appointment)}
-                        >
-                          <Edit size={16} />
-                        </ActionIcon>
-                        <ActionIcon
-                          variant="light"
-                          color="red"
-                          onClick={() => handleDelete(appointment.id)}
-                        >
-                          <Trash2 size={16} />
-                        </ActionIcon>
-                      </>
-                    )}
-                  </Group>
-                </Table.Td>
+      {/* Table */}
+      <Paper radius="md" shadow="sm" p="md" withBorder>
+        <Text size="sm" py="md">Appointments ({filteredAppointments.length})</Text>
+        <ScrollArea
+          onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+        >
+          <Table striped highlightOnHover verticalSpacing="sm" style={{ minWidth: 800 }}>
+            <Table.Thead>
+              <Table.Tr
+                className={`text-left ${scrolled ? 'sticky top-0 z-20' : ''}`}
+                style={scrolled ? { backgroundColor: 'white', backdropFilter: 'blur(8px)' } : {}}
+              >
+                <Table.Th fw={500}>Patient</Table.Th>
+                <Table.Th fw={500}>Doctor</Table.Th>
+                <Table.Th fw={500}>Date & Time</Table.Th>
+                <Table.Th fw={500}>Status</Table.Th>
+                <Table.Th fw={500}>Reason</Table.Th>
+                <Table.Th fw={500}>Actions</Table.Th>
               </Table.Tr>
-            ))}
-          </Table.Tbody>
-        </Table>
+            </Table.Thead>
+            <Table.Tbody>
+              {filteredAppointments.map((appointment) => (
+                <Table.Tr key={appointment.id}>
+                  <Table.Td>
+                    <Text size="sm" fw={500}>{appointment.patientName}</Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Text size="sm">{appointment.doctorName}</Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Group gap="xs">
+                      <Calendar size={14} />
+                      <Text size="sm">
+                        {appointment.date.toLocaleDateString()} at {appointment.time}
+                      </Text>
+                    </Group>
+                  </Table.Td>
+                  <Table.Td>
+                    <Badge color={getStatusColor(appointment.status)} size="sm">
+                      {appointment.status}
+                    </Badge>
+                  </Table.Td>
+                  <Table.Td>
+                    <Text size="sm" c="dimmed" lineClamp={1}>
+                      {appointment.reason}
+                    </Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Group gap="xs">
 
-        {filteredAppointments.length === 0 && (
-          <Text ta="center" c="dimmed" py="xl">
-            No appointments found
-          </Text>
-        )}
+                      <Eye size={16} onClick={() => handleView(appointment)} />
+
+                      {userRole === 'nurse' && (
+                        <>
+                          <Edit size={16} onClick={() => handleEdit(appointment)} />
+                          <Trash2 size={16} onClick={() => handleDelete(appointment.id)} />
+                        </>
+                      )}
+                    </Group>
+                  </Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+
+          {filteredAppointments.length === 0 && (
+            <Text ta="center" c="dimmed" py="xl">
+              No appointments found
+            </Text>
+          )}
+        </ScrollArea>
       </Paper>
 
       {/* Appointment Details Modal */}
@@ -194,7 +193,8 @@ const AppointmentsList: React.FC<AppointmentsListProps> = ({
         opened={opened}
         onClose={close}
         title="Appointment Details"
-        size="md"
+        size={rem(500)}
+        radius="md"
       >
         {selectedAppointment && (
           <Stack>
@@ -224,16 +224,16 @@ const AppointmentsList: React.FC<AppointmentsListProps> = ({
               <Text fw={500}>Reason:</Text>
               <Text>{selectedAppointment.reason}</Text>
             </Group>
-            
+
             {userRole === 'nurse' && (
               <Flex justify="flex-end" gap="md" mt="md">
-                <Button variant="outline" onClick={close}>
+                <Button variant="outline" onClick={close} size="sm">
                   Close
                 </Button>
                 <Button onClick={() => {
                   close()
                   handleEdit(selectedAppointment)
-                }}>
+                }} size="sm">
                   Edit Appointment
                 </Button>
               </Flex>
