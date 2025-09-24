@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { PATHS } from '../../lib/urls';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +16,7 @@ const LoginForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(username, password, rememberMe);
+        toast.success('Login successful!');
         router.push(PATHS.DASHBOARD);
     };
 

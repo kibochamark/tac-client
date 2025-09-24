@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { toast } from 'sonner';
 import { SignupFormSchema } from '../../lib/schema';
 import { PATHS } from '../../lib/urls';
 
@@ -29,7 +30,7 @@ const SignupForm = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    toast.success('Account created successfully!');
   };
 
   return (
