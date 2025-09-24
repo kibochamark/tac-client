@@ -2,6 +2,7 @@
 'use client'
 
 import { TbActivityHeartbeat } from "react-icons/tb"
+import { IoMdTrendingUp, IoMdTrendingDown } from "react-icons/io"
 
 
 const CommonAccessEvents = () => {
@@ -13,8 +14,7 @@ const CommonAccessEvents = () => {
             color: 'bg-red-500',
             textColor: 'text-red-700',
             bgColor: 'bg-orange-100',
-            change: '↙12.5%',
-            changeColor: 'text-green-600',
+            change: -12.5,
             progress: 80
         },
         {
@@ -24,8 +24,7 @@ const CommonAccessEvents = () => {
             color: 'bg-red-600',
             textColor: 'text-red-700',
             bgColor: 'bg-red-100',
-            change: '↙ 25.0%',
-            changeColor: 'text-green-600',
+            change: -25.0,
             progress: 35
         },
         {
@@ -35,8 +34,7 @@ const CommonAccessEvents = () => {
             color: 'bg-orange-300',
             textColor: 'text-orange-700',
             bgColor: 'bg-yellow-200',
-            change: '↗  15.0%',
-            changeColor: 'text-red-600',
+            change: 15.0,
             progress: 55
         },
         {
@@ -46,8 +44,7 @@ const CommonAccessEvents = () => {
             color: 'bg-orange-300',
             textColor: 'text-orange-700',
             bgColor: 'bg-yellow-200',
-            change: '↗  8.3%',
-            changeColor: 'text-red-600',
+            change: 8.3,
             progress: 95
         }
     ]
@@ -66,7 +63,7 @@ const CommonAccessEvents = () => {
 
             <div className="space-y-4 sm:space-y-6 px-2 sm:px-4 py-2">
                 {events.map((event, index) => (
-                    <div key={index} className="space-y-3 sm:space-y-4">
+                    <div key={index} className="space-y-3 sm:space-y-4 bg-gray-50 rounded-lg p-2">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
                                 <div className={`w-2 h-2 sm:w-3 sm:h-3 ${event.color} rounded-full flex-shrink-0`}></div>
@@ -77,9 +74,16 @@ const CommonAccessEvents = () => {
                             </div>
                             <div className="flex items-center space-x-2 sm:flex-col sm:items-center sm:space-x-0 sm:space-y-1">
                                 <span className="font-bold text-gray-900 text-base sm:text-lg">{event.count}</span>
-                                <span className={`text-xs sm:text-sm ${event.changeColor}`}>
-                                    {event.change}
-                                </span>
+                                <div className="flex items-center space-x-1">
+                                    {event.change > 0 ? (
+                                        <IoMdTrendingUp className="w-3 h-3 text-red-600" />
+                                    ) : (
+                                        <IoMdTrendingDown className="w-3 h-3 text-green-600 transform scale-x-[-1]" />
+                                    )}
+                                    <span className={`text-xs sm:text-sm font-medium ${event.change > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                                        {event.change > 0 ? `${event.change}%` : `${event.change * -1}%`}
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
