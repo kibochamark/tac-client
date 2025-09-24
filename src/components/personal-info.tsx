@@ -4,7 +4,6 @@ import "@mantine/dates/styles.css";
 import { usePersistentForm } from "@/hooks/usePersistentForm";
 import {
   Button,
-  Divider,
   Group,
   Stack,
   Textarea,
@@ -13,6 +12,7 @@ import {
 import { DatePickerInput } from "@mantine/dates";
 import { Controller } from "react-hook-form";
 import { z } from "zod";
+import { toast } from 'sonner';
 
 // Zod schema
 const personalInfoSchema = z.object({
@@ -83,6 +83,7 @@ const PersonalInfo = () => {
   const { control, register, handleSubmit, formState: { errors } } = form;
 
   const onSubmit = (values: PersonalInfoForm) => {
+    toast.success("Personal information saved successfully!");
     console.log("Saving data:", values);
   };
 
@@ -95,14 +96,13 @@ const PersonalInfo = () => {
       {...register(config.name)}
       error={errors[config.name]?.message}
       required={config.required}
+      radius="md"
+      size="xs"
     />
   );
 
   return (
     <>
-
-      <Divider mb="xl" />
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="lg">
           {/* Full Name + MRN */}
@@ -124,6 +124,8 @@ const PersonalInfo = () => {
                   onChange={field.onChange}
                   error={errors.dateOfBirth?.message}
                   required
+                  radius="md"
+                  size="xs"
                 />
               )}
             />
@@ -144,11 +146,13 @@ const PersonalInfo = () => {
             error={errors.address?.message}
             required
             rows={3}
+            radius="md"
+            size="xs"
           />
 
           <Group justify="flex-end">
-            <Button type="reset" variant="outline">Cancel</Button>
-            <Button type="submit">
+            <Button type="reset" variant="outline" size="xs">Cancel</Button>
+            <Button type="submit" size="xs">
               Save Changes
             </Button>
           </Group>

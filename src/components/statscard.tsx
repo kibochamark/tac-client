@@ -1,6 +1,7 @@
 import React from 'react';
 import { BiBed, BiCalendar, BiUser } from "react-icons/bi";
 import { FiAlertTriangle } from "react-icons/fi";
+import { IoMdTrendingUp, IoMdTrendingDown } from "react-icons/io";
 
 const StatsCards = () => {
     const stats = [
@@ -96,7 +97,7 @@ const StatsCards = () => {
                                 <div className="flex items-center">
                                     <span className={`text-xs sm:text-sm font-medium ${stat.changeColor} flex items-center`}>
                                         <span className="mr-1">
-                                            {stat.changeType === 'increase' ? '↗' : '↙'}
+                                            {stat.changeType === 'increase' ? <IoMdTrendingUp size={12} /> : <IoMdTrendingDown size={12} />}
                                         </span>
                                         <span className="truncate">{stat.change}</span>
                                     </span>

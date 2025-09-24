@@ -1,7 +1,8 @@
-import { ActionIcon, Badge, Button, Divider, Group, Stack, Text } from "@mantine/core";
+import { ActionIcon, Badge, Button, Group, Stack, Text } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE, MS_EXCEL_MIME_TYPE, PDF_MIME_TYPE } from '@mantine/dropzone';
 import { useRef } from "react";
 import { BiImage, BiTrash, BiUpload, BiX } from "react-icons/bi";
+import { toast } from 'sonner';
 import usePatientDocument from "../hooks/usePatientDocument";
 
 const Documents = () => {
@@ -26,45 +27,46 @@ const Documents = () => {
 
     return (
         <>
-              <Divider mb="xl" />
+            {/* Dropzone - Visible only on large screens */}
+            <div className="hidden lg:block">
+                <Dropzone
+                    onDrop={handleDrop}
+                    onReject={(files) => toast.error(`${files.length} file(s) rejected. Please check file type and size.`)}
+                    maxSize={5 * 1024 ** 2}
+                    accept={[
+                        ...IMAGE_MIME_TYPE,
+                        ...PDF_MIME_TYPE,
+                        ...MS_EXCEL_MIME_TYPE
+                    ]}
+                    openRef={openRef}
+                    className="border-2 border-dashed border-gray-300 rounded-md p-4 m-2"
+                >
+                    <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
+                        <Dropzone.Accept>
+                            <BiUpload size={52} color="var(--mantine-color-blue-6)"  />
+                        </Dropzone.Accept>
+                        <Dropzone.Reject>
+                            <BiX size={52} color="var(--mantine-color-red-6)" />
+                        </Dropzone.Reject>
+                        <Dropzone.Idle>
+                            <BiImage size={52} color="var(--mantine-color-dimmed)" />
+                        </Dropzone.Idle>
 
-            <Dropzone
-                onDrop={handleDrop}
-                onReject={(files) => console.log('rejected files', files)}
-                maxSize={5 * 1024 ** 2}
-                accept={[
-                    ...IMAGE_MIME_TYPE,
-                    ...PDF_MIME_TYPE,
-                    ...MS_EXCEL_MIME_TYPE
-                ]}
-                openRef={openRef}
-                className="border-2 border-dashed border-gray-300 rounded-md p-4 m-2"
-            >
-                <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
-                    <Dropzone.Accept>
-                        <BiUpload size={52} color="var(--mantine-color-blue-6)" />
-                    </Dropzone.Accept>
-                    <Dropzone.Reject>
-                        <BiX size={52} color="var(--mantine-color-red-6)" />
-                    </Dropzone.Reject>
-                    <Dropzone.Idle>
-                        <BiImage size={52} color="var(--mantine-color-dimmed)" />
-                    </Dropzone.Idle>
-
-                    <div>
-                        <Text size="xl" inline>
-                            Drag images here or click to select files
-                        </Text>
-                        <Text size="sm" c="dimmed" inline mt={7}>
-                            Attach as many files as you like, each file should not exceed 5mb
-                        </Text>
-                    </div>
-                </Group>
-            </Dropzone>
+                        <div>
+                            <Text size="xl" inline>
+                                Drag images here or click to select files
+                            </Text>
+                            <Text size="sm" c="dimmed" inline mt={7}>
+                                Attach as many files as you like, each file should not exceed 5mb
+                            </Text>
+                        </div>
+                    </Group>
+                </Dropzone>
+            </div>
 
             {/* Selected Files List */}
             {documents.length > 0 && (
-                <Stack gap="sm" mt="md">
+                <Stack gap="sm" mt="md" className="hidden">
                     <Text size="lg" fw={500}>Selected Files ({documents.length})</Text>
                     {documents.map((file, index) => (
                         <Group key={index} justify="space-between" p="sm" bg="gray.0" style={{ borderRadius: '8px' }}>
@@ -93,12 +95,15 @@ const Documents = () => {
                 </Stack>
             )}
 
-            <Group justify="center" mt="md">
-                <Button onClick={() => openRef.current?.()} >Select files</Button>
-            </Group>
+            {/* Select Files Button - Visible only on small screens */}
+            <div className="lg:hidden">
+                <Group justify="center" mt="md">
+                    <Button onClick={() => openRef.current?.()} size="xs">Select files</Button>
+                </Group>
+            </div>
             <Group justify="flex-end" mt="md">
-                <Button type="reset" variant="outline">Cancel</Button>
-                <Button type="submit">
+                <Button type="reset" variant="outline" size="xs">Cancel</Button>
+                <Button type="submit" size="xs">
                     Save Changes
                 </Button>
             </Group>

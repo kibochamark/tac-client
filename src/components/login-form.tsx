@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface LoginFormProps {
     onSubmit?: (username: string, password: string, rememberMe: boolean) => void;
@@ -61,7 +62,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
 
                     <button
                         type="button"
-                        onClick={() => console.log('Forgot password clicked')}
+                        onClick={() => toast.info('Forgot password feature coming soon!')}
                         className="text-sm text-purple-600 hover:text-purple-700 hover:underline font-medium transition-colors duration-200"
                     >
                         Forgot password?

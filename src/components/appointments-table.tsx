@@ -1,6 +1,7 @@
 // components/Dashboard/AppointmentsTable.tsx
 'use client'
 
+import { Badge, Button } from "@mantine/core"
 import { BiCalendar } from "react-icons/bi"
 import { BsEye } from "react-icons/bs"
 
@@ -16,14 +17,14 @@ const AppointmentsTable = () => (
     {/* Header */}
     <div className="p-3 sm:p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
       <div className="flex items-center space-x-2">
-        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-400 rounded-full flex items-center justify-center">
           <BiCalendar className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
         </div>
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Today&apos;s Appointments</h3>
+        <h3 className="text-base sm:text-sm  text-gray-900">Today&apos;s Appointments</h3>
       </div>
       <div className="flex items-center space-x-2 sm:space-x-3">
-        <span className="text-xs sm:text-sm text-gray-500">{appointments.length} Total</span>
-        <button className="text-blue-600 text-xs sm:text-sm font-medium hover:text-blue-700">View All</button>
+        <Badge size="sm" variant="light" color="green">{appointments.length} Total</Badge>
+        <Button variant="outline" radius="xl" color="gray" size="compact-sm">View All</Button>
       </div>
     </div>
 

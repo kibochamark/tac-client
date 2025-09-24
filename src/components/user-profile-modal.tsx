@@ -11,6 +11,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { BiUser, BiX } from 'react-icons/bi'
+import { toast } from 'sonner'
 import { ProfileHeader, ProfileDetails, ProfilePermissions, ProfileActions } from './user-profile/'
 
 interface UserProfileModalProps {
@@ -50,12 +51,12 @@ export const UserProfileModal = ({
   user = defaultUser,
 }: UserProfileModalProps) => {
   const handleSettings = () => {
-    console.log('Open settings')
+    toast.info('Opening settings...')
     // TODO: Implement settings functionality
   }
 
   const handleChangePassword = () => {
-    console.log('Change password')
+    toast.info('Opening change password form...')
     // TODO: Implement change password functionality
   }
 

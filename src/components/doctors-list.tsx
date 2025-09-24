@@ -1,7 +1,10 @@
 // components/Dashboard/DoctorsList.tsx
 'use client'
 
+import { Badge } from "@mantine/core"
+import { AiOutlineExclamationCircle } from "react-icons/ai"
 import { BiUser } from "react-icons/bi"
+import { CiCircleCheck, CiClock2 } from "react-icons/ci"
 
 const DoctorsList = () => {
   const doctors = [
@@ -11,8 +14,8 @@ const DoctorsList = () => {
       specialty: 'Vascular Access',
       patients: 12,
       status: 'Available',
-      statusColor: 'bg-green-100 text-green-700',
-      statusDot: 'bg-green-500'
+      statusColor: 'green',
+      icon: <CiCircleCheck className="text-green-500" />
     },
     {
       initials: 'SW',
@@ -20,8 +23,8 @@ const DoctorsList = () => {
       specialty: 'Nephrology',
       patients: 8,
       status: 'Busy',
-      statusColor: 'bg-yellow-100 text-yellow-700',
-      statusDot: 'bg-yellow-500'
+      statusColor: 'yellow',
+      icon: <CiClock2 className="text-yellow-500" />
     },
     {
       initials: 'JB',
@@ -29,8 +32,8 @@ const DoctorsList = () => {
       specialty: 'Surgery',
       patients: 15,
       status: 'Available',
-      statusColor: 'bg-green-100 text-green-700',
-      statusDot: 'bg-green-500'
+      statusColor: 'green',
+      icon: <CiCircleCheck className="text-green-500" />
     },
     {
       initials: 'ED',
@@ -38,8 +41,8 @@ const DoctorsList = () => {
       specialty: 'Radiology',
       patients: 0,
       status: 'On Leave',
-      statusColor: 'bg-red-100 text-red-700',
-      statusDot: 'bg-red-500'
+      statusColor: 'red',
+      icon: <AiOutlineExclamationCircle className="text-red-500" />
     }
   ]
 
@@ -73,10 +76,10 @@ const DoctorsList = () => {
                   </div>
                   
                   <div className="flex items-center space-x-1 sm:space-x-2">
-                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 ${doctor.statusDot} rounded-full flex-shrink-0`}></div>
-                    <span className={`px-2 py-1 rounded-2xl text-xs font-medium ${doctor.statusColor} whitespace-nowrap`}>
+                    <Badge size="sm" variant="light" color={doctor.statusColor} leftSection={doctor.icon}>
                       {doctor.status}
-                    </span>
+                    </Badge>
+                    
                   </div>
                 </div>
               </div>
