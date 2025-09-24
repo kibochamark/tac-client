@@ -12,6 +12,7 @@ import { NotificationsModal } from '../notifications-modal'
 import { SidebarFooter } from '../sidebar-footer'
 import { useSidebar } from '@/hooks/useSidebar'
 import { handleNavigation } from '@/lib/utils'
+import { toast } from 'sonner'
 import { MobileMenuToggle } from '../mobile-menu-toggle'
 
 interface SidebarProps {
@@ -44,7 +45,7 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
   }
 
   const onSignOut = () => {
-    console.log('Signing out...')
+    toast.info('Signing out...')
     // Add your sign out logic here
   }
 
