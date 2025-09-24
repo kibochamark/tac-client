@@ -6,8 +6,13 @@ import { Calendar, List } from 'lucide-react'
 import CalendarView from '@/components/appointments/calendar-view'
 import AppointmentsList from '@/components/appointments/appointments-list'
 import { Appointment, UserRole } from '@/components/appointments/types'
+import { toast } from 'sonner'
+import { ConfirmDialog } from '@/components/common/confirm-dialog'
+import { useConfirmDialog } from '@/hooks/useConfirmDialog'
 
 const AppointmentsPage = () => {
+  const confirmDialog = useConfirmDialog()
+  
   // Sample appointments data
   const [appointments, setAppointments] = useState<Appointment[]>([
     {
@@ -67,7 +72,20 @@ const AppointmentsPage = () => {
   }
 
   const handleDeleteAppointment = (appointmentId: string) => {
-    setAppointments(prev => prev.filter(apt => apt.id !== appointmentId))
+    const appointment = appointments.find(apt => apt.id === appointmentId)
+    confirmDialog.openConfirmDialog(
+      {
+        title: 'Delete Appointment',
+        message: `Are you sure you want to delete the appointment with ${appointment?.patientName}? This action cannot be undone.`,
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+        confirmColor: 'red'
+      },
+      () => {
+        setAppointments(prev => prev.filter(apt => apt.id !== appointmentId))
+        toast.success('Appointment deleted successfully')
+      }
+    )
   }
 
   const handleViewAppointment = (appointment: Appointment) => {
@@ -167,6 +185,19 @@ const AppointmentsPage = () => {
           </Tabs.Panel>
         </Tabs>
       </Stack>
+
+      <ConfirmDialog
+        opened={confirmDialog.opened}
+        onClose={confirmDialog.closeConfirmDialog}
+        onConfirm={confirmDialog.onConfirm || (() => {})}
+        title={confirmDialog.options?.title}
+        message={confirmDialog.options?.message || ''}
+        confirmText={confirmDialog.options?.confirmText}
+        cancelText={confirmDialog.options?.cancelText}
+        confirmColor={confirmDialog.options?.confirmColor}
+        isLoading={confirmDialog.isLoading}
+        icon={confirmDialog.options?.icon}
+      />
     </>
   )
 }

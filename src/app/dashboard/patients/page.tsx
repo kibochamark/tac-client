@@ -1,10 +1,9 @@
 'use client';
 import {
-  ActionIcon,
   Badge,
-  Group,
   Modal,
   Paper,
+  rem,
   ScrollArea,
   Select,
   Stack,
@@ -148,106 +147,111 @@ const Page = () => {
         {/* Search + Filters */}
         <Paper withBorder p="md" radius="md">
           <Stack gap="md">
-            <TextInput
-              placeholder="Search by name or MRN..."
-              leftSection={<BiSearch size={18} />}
-              radius="xl"
-              size="md"
-              variant="filled"
-            />
-            
-            <Group grow>
-              <Select
-                data={['All Clinics', 'Dialysis Center A', 'Dialysis Center B']}
-                defaultValue="All Clinics"
+            <div className='flex flex-col md:flex-row gap-2'>
+              <TextInput
+                placeholder="Search by name or MRN..."
+                leftSection={<BiSearch size={18} />}
                 radius="xl"
-                size="md"
+                size="xs"
                 variant="filled"
+                className="md:grow"
               />
-              <Select
-                data={['All Access Types', 'AVF', 'AVG']}
-                defaultValue="All Access Types"
-                radius="xl"
-                size="md"
-                variant="filled"
-              />
-              <Select
-                data={['All Statuses', 'Active', 'Overdue Evaluation']}
-                defaultValue="All Statuses"
-                radius="xl"
-                size="md"
-                variant="filled"
-              />
-            </Group>
+              
+                <Select
+                  data={['All Clinics', 'Dialysis Center A', 'Dialysis Center B']}
+                  defaultValue="All Clinics"
+                  radius="xl"
+                  size="xs"
+                  variant="filled"
+                  className="md:grow"
+                />
+                <Select
+                  data={['All Access Types', 'AVF', 'AVG']}
+                  defaultValue="All Access Types"
+                  radius="xl"
+                  size="xs"
+                  variant="filled"
+                  className="md:grow"
+                />
+                <Select
+                  data={['All Statuses', 'Active', 'Overdue Evaluation', 'Missing Info']}
+                  defaultValue="All Statuses"
+                  radius="xl"
+                  size="xs"
+                  variant="filled"
+                  className="md:grow"
+                />
+            </div>
           </Stack>
         </Paper>
 
         {/* Table */}
         <Paper radius="md" shadow="sm" p="md" withBorder>
-          <ScrollArea 
-            h={{ base: 400, sm: 300 }} 
+          <Text size="sm" py={"md"}>Patients ({rows.length})</Text>
+          <ScrollArea
+            h={{ base: 400, sm: 300 }}
             onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
           >
             <Table striped highlightOnHover verticalSpacing="sm" style={{ minWidth: 800 }}>
-              <thead>
-                <tr className={`text-left bg-white z-20 ${scrolled ? 'sticky top-0' : ''}`}>
-                  <th>Patient Name</th>
-                  <th>MRN</th>
-                  <th>Access Type</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Last Evaluation</th>
-                  <th>Clinic</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+              <Table.Thead>
+                <Table.Tr 
+                  className={`text-left ${scrolled ? 'sticky top-0 z-20' : ''}`}
+                  style={scrolled ? { backgroundColor: 'white', backdropFilter: 'blur(8px)' } : {}}
+                >
+                  <Table.Th fw={500}>Patient Name</Table.Th>
+                  <Table.Th fw={500} >MRN</Table.Th>
+                  <Table.Th fw={500} >Access Type</Table.Th>
+                  <Table.Th fw={500} >Location</Table.Th>
+                  <Table.Th fw={500} >Status</Table.Th>
+                  <Table.Th fw={500} >Last Evaluation</Table.Th>
+                  <Table.Th fw={500} >Clinic</Table.Th>
+                  <Table.Th fw={500} >Actions</Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>
                 {rows.map((row) => (
-                  <tr key={row.mrn}>
-                    <td>
-                      <Text size="sm" fw={500}>{row.name}</Text>
-                    </td>
-                    <td>
+                  <Table.Tr key={row.mrn}>
+                    <Table.Td>
+                      <Text size="sm" >{row.name}</Text>
+                    </Table.Td>
+                    <Table.Td>
                       <Text size="xs" c="dimmed">{row.mrn}</Text>
-                    </td>
-                    <td>
+                    </Table.Td>
+                    <Table.Td>
                       <Badge color={row.access.color} variant="filled" size="sm">
                         {row.access.type}
                       </Badge>
-                    </td>
-                    <td>
+                    </Table.Td>
+                    <Table.Td>
                       <Text size="sm">{row.location}</Text>
-                    </td>
-                    <td>
+                    </Table.Td>
+                    <Table.Td>
                       <Badge color={row.status.color} size="sm">
                         {row.status.label}
                       </Badge>
-                    </td>
-                    <td>
+                    </Table.Td>
+                    <Table.Td>
                       <Text size="sm">{row.evaluation}</Text>
-                    </td>
-                    <td>
+                    </Table.Td>
+                    <Table.Td>
                       <Text size="sm">{row.clinic}</Text>
-                    </td>
-                    <td>
-                      <ActionIcon variant="light" color="blue" radius="xl" onClick={open}>
-                        <BiEdit size={18} />
-                      </ActionIcon>
-                    </td>
-                  </tr>
+                    </Table.Td>
+                    <Table.Td>
+                      <BiEdit size={16} onClick={open} />
+                    </Table.Td>
+                  </Table.Tr>
                 ))}
-              </tbody>
+              </Table.Tbody>
             </Table>
             <Modal
-              opened={opened} 
-              onClose={close} 
-              title="Patient Details" 
-              size="xl"
+              opened={opened}
+              onClose={close}
+              title="Patient Details"
+              size={rem(500)}
               radius="md"
-              fullScreen
             >
               {/* Modal content */}
-              <Tabs variant="pills" defaultValue="Personal Information" >
+              <Tabs defaultValue="Personal Information" >
                 <Tabs.List>
                   <Tabs.Tab value="Personal Information">Personal Information</Tabs.Tab>
                   <Tabs.Tab value="Access Information"> Access Information</Tabs.Tab>
@@ -262,7 +266,7 @@ const Page = () => {
                 <Tabs.Panel value="Documents">
                   <Documents />
                 </Tabs.Panel>
-              </Tabs>            
+              </Tabs>
             </Modal>
           </ScrollArea>
         </Paper>
