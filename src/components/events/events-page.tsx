@@ -3,6 +3,9 @@ import DashboardHeader from '@/components/header'
 import { Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import { ConfirmDialog } from '@/components/common/confirm-dialog'
+import { useConfirmDialog } from '@/hooks/useConfirmDialog'
 import EventList from './events-list'
 import EventFilters from './event-filters'
 import EventTable from './event-table'
@@ -38,6 +41,7 @@ const EventsPage = () => {
   const [scrolled, setScrolled] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedEvent, setSelectedEvent] = useState<EventDetails | null>(null);
+  const confirmDialog = useConfirmDialog();
 
   const events = [
     {
@@ -110,10 +114,20 @@ const EventsPage = () => {
     open()
   }
 
-  const handleEventUpdate = (updatedEvent: EventDetails) => {
-    console.log('Event updated:', updatedEvent)
-    // Here you would typically update the event in your state or make an API call
-    // For now, we'll just log it
+  const handleEventUpdate = () => {
+    confirmDialog.openConfirmDialog(
+      {
+        title: 'Update Event',
+        message: 'Are you sure you want to update this event? The changes will be saved immediately.',
+        confirmText: 'Update',
+        cancelText: 'Cancel',
+        confirmColor: 'blue'
+      },
+      () => {
+        toast.success('Event updated successfully')
+        // Here you would typically update the event in your state or make an API call
+      }
+    )
   }
 
   return (
@@ -127,7 +141,7 @@ const EventsPage = () => {
       {/* Stats cards */}
       <EventList />
 
-      <Stack p={{ base: 'sm', sm: 'md' }} gap="lg">
+      <Stack mt={"md"} gap="lg">
         {/* Filters */}
         <EventFilters />
 
@@ -145,6 +159,19 @@ const EventsPage = () => {
           close={close} 
           eventDetails={selectedEvent || undefined}
           onUpdate={handleEventUpdate}
+        />
+
+        <ConfirmDialog
+          opened={confirmDialog.opened}
+          onClose={confirmDialog.closeConfirmDialog}
+          onConfirm={confirmDialog.onConfirm || (() => {})}
+          title={confirmDialog.options?.title}
+          message={confirmDialog.options?.message || ''}
+          confirmText={confirmDialog.options?.confirmText}
+          cancelText={confirmDialog.options?.cancelText}
+          confirmColor={confirmDialog.options?.confirmColor}
+          isLoading={confirmDialog.isLoading}
+          icon={confirmDialog.options?.icon}
         />
       </Stack>
     </>

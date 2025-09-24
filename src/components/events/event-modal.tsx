@@ -1,5 +1,6 @@
-import { Modal, Stack, Text, Group, Badge, Divider, ScrollArea, Button, Flex } from '@mantine/core'
+import { Badge, Button, Flex, Group, Modal, ScrollArea, Stack, Text } from '@mantine/core'
 import { FC } from 'react'
+import { TbActivityHeartbeat } from 'react-icons/tb'
 
 interface EventDetails {
     patient: string
@@ -53,85 +54,75 @@ const EventModal: FC<EventModalProps> = ({ opened, close, eventDetails, onUpdate
     }
 
     return (
-        <Modal opened={opened} onClose={close} title="Event Details" size="xl" radius="md">
+        <Modal opened={opened} onClose={close} size="600" radius="md">
+            <Flex align="center" gap="md" mt={-5} w="100%" >
+                <TbActivityHeartbeat size={24} />
+                <Text fw={700} size="lg" c="dark" mb={10}>Event Details-{eventDetails?.patient}</Text>
+            </Flex>
             <ScrollArea h={500}>
                 <Stack gap="md">
                     {eventDetails ? (
                         <>
-
                             <Group grow>
-                                <Group >
-                                    <Text fw={500}>Patient:</Text>
-                                    <Text>{eventDetails.patient}</Text>
-                                </Group>
-                                <Group>
-                                    <Text fw={500}>MRN Code:</Text>
-                                    <Text>{eventDetails.mrnCode}</Text>
-                                </Group>
-                            </Group>
+                                <Flex direction={'column'}>
+                                    <Text fw={500}>Patient</Text>
+                                    <Text>{eventDetails.patient + ' (' + eventDetails.mrnCode + ')'}</Text>
+                                </Flex>
 
-                            <Divider />
-
-                            {/* Event Information */}
-                            <Group justify="space-between">
-                                <Text size="lg" fw={600}>Event Information</Text>
+                                <Flex direction={'column'}>
+                                    <Text fw={500}>Event Type</Text>
+                                    <Text>{eventDetails.eventType}</Text>
+                                </Flex>
                             </Group>
                             <Group grow>
                                 <div>
-                                    <Group>
-                                        <Text fw={500}>Event Type:</Text>
-                                        <Text>{eventDetails.eventType}</Text>
-                                    </Group>
-                                    <Group>
-                                        <Text fw={500}>Severity:</Text>
-                                        <Badge color={getSeverityColor(eventDetails.severity)} variant="filled">
-                                            {eventDetails.severity}
-                                        </Badge>
-                                    </Group>
+                                    <Text fw={500}>Severity</Text>
+                                    <Badge color={getSeverityColor(eventDetails.severity)} variant="filled" size="sm">
+                                        {eventDetails.severity}
+                                    </Badge>
+                                </div>
+
+
+                                <div>
+                                    <Text fw={500}>Date & Time</Text>
+                                    <Text>{eventDetails.dateTime}</Text>
+                                </div>
+                            </Group>
+                            <Group grow>
+                                <div>
+                                    <Text fw={500}>Reported By</Text>
+                                    <Text>{eventDetails.reportedBy}</Text>
                                 </div>
                                 <div>
-                                    <Group>
-                                        <Text fw={500}>Date & Time:</Text>
-                                        <Text>{eventDetails.dateTime}</Text>
-                                    </Group>
-                                    <Group>
-                                        <Text fw={500}>Reported By:</Text>
-                                        <Text>{eventDetails.reportedBy}</Text>
-                                    </Group>
+                                    <Text fw={500}>Current Status</Text>
+                                    <Badge color={getStatusColor(eventDetails.currentStatus)} variant="outline">
+                                        {eventDetails.currentStatus}
+                                    </Badge>
                                 </div>
                             </Group>
 
-                            <Group>
-                                <Text fw={500}>Current Status:</Text>
-                                <Badge color={getStatusColor(eventDetails.currentStatus)} variant="outline">
-                                    {eventDetails.currentStatus}
-                                </Badge>
-                            </Group>
 
-                            <Divider />
-
-                            {/* Description */}
-                            <Group justify="space-between">
-                                <Text size="lg" fw={600}>Description</Text>
-                            </Group>
-                            <Text size="sm" c="dimmed" style={{ whiteSpace: 'pre-wrap' }}>
+                            <Text fw={500}>Description</Text>
+                            <Text size="sm" c="dimmed" p="md" className='border border-gray-200 rounded-xl'>
                                 {eventDetails.description}
                             </Text>
 
-                            <Divider />
 
-                            {/* Previous Notes */}
-                            <Group justify="space-between">
-                                <Text size="lg" fw={600}>Previous Notes</Text>
-                            </Group>
+
+
+
+                            <Text fw={500}>Previous Notes</Text>
+
                             {eventDetails.previousNotes.length > 0 ? (
-                                <Stack gap="sm">
-                                    {eventDetails.previousNotes.map((note, index) => (
-                                        <Text key={index} size="sm" c="dimmed" style={{ whiteSpace: 'pre-wrap' }}>
-                                            {note}
-                                        </Text>
-                                    ))}
-                                </Stack>
+                                <Text
+                                    size="sm"
+                                    c="dimmed"
+                                    p="xs"
+                                    className='border border-gray-200 rounded-xl'
+                                    style={{ whiteSpace: 'pre-line' }}
+                                >
+                                    {eventDetails.previousNotes.join('\n\n')}
+                                </Text>
                             ) : (
                                 <Text size="sm" c="dimmed" fs="italic">No previous notes available</Text>
                             )}
@@ -142,12 +133,12 @@ const EventModal: FC<EventModalProps> = ({ opened, close, eventDetails, onUpdate
                 </Stack>
             </ScrollArea>
 
-            {/* Action Buttons */}
+
             <Flex justify="flex-end" gap="md" mt="md">
-                <Button variant="outline" onClick={handleCancel}>
+                <Button variant="outline" onClick={handleCancel} size="sm">
                     Cancel
                 </Button>
-                <Button onClick={handleUpdate} disabled={!eventDetails}>
+                <Button onClick={handleUpdate} disabled={!eventDetails} size="sm">
                     Update Event
                 </Button>
             </Flex>

@@ -1,4 +1,4 @@
-import { ActionIcon, Badge, Paper, ScrollArea, Table, Text } from '@mantine/core'
+import { Badge, Paper, ScrollArea, Table, Text } from '@mantine/core'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { BsEye } from 'react-icons/bs'
 
@@ -23,37 +23,40 @@ interface EventTableProps {
 const EventTable: FC<EventTableProps> = ({ events, scrolled, setScrolled, onEventSelect }) => {
   return (
     <Paper radius="md" shadow="sm" p="md" withBorder>
-      <ScrollArea 
-        h={{ base: 400, sm: 300 }} 
+      <Text size="sm" py={"md"}>Events ({events.length})</Text>
+      <ScrollArea
         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <Table striped highlightOnHover verticalSpacing="sm" style={{ minWidth: 900 }}>
-          <thead>
-            <tr className={`text-left bg-white z-20 ${scrolled ? 'sticky top-0' : ''}`}>
-              <th>Patient</th>
-              <th>MRN</th>
-              <th>Event Type</th>
-              <th>Severity</th>
-              <th>Status</th>
-              <th>Date & Time</th>
-              <th>Reported By</th>
-              <th>Assigned To</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+          <Table.Thead>
+            <Table.Tr
+              className={`text-left ${scrolled ? 'sticky top-0 z-20' : ''}`}
+              style={scrolled ? { backgroundColor: 'white', backdropFilter: 'blur(8px)' } : {}}
+            >
+              <Table.Th fw={500}>Patient</Table.Th>
+              <Table.Th fw={500}>MRN</Table.Th>
+              <Table.Th fw={500}>Event Type</Table.Th>
+              <Table.Th fw={500}>Severity</Table.Th>
+              <Table.Th fw={500}>Status</Table.Th>
+              <Table.Th fw={500}>Date & Time</Table.Th>
+              <Table.Th fw={500}>Reported By</Table.Th>
+              <Table.Th fw={500}>Assigned To</Table.Th>
+              <Table.Th fw={500}>Actions</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
             {events.map((event) => (
-              <tr key={event.mrn}>
-                <td>
-                  <Text size="sm" fw={500}>{event.patient}</Text>
-                </td>
-                <td>
+              <Table.Tr key={event.mrn}>
+                <Table.Td>
+                  <Text size="sm">{event.patient}</Text>
+                </Table.Td>
+                <Table.Td>
                   <Text size="xs" c="dimmed">{event.mrn}</Text>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Text size="sm">{event.eventType}</Text>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Badge
                     color={
                       event.severity === "Critical" ? "red" :
@@ -64,8 +67,8 @@ const EventTable: FC<EventTableProps> = ({ events, scrolled, setScrolled, onEven
                   >
                     {event.severity}
                   </Badge>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Badge
                     color={
                       event.status === "Open" ? "red" :
@@ -76,24 +79,22 @@ const EventTable: FC<EventTableProps> = ({ events, scrolled, setScrolled, onEven
                   >
                     {event.status}
                   </Badge>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Text size="sm">{event.date} {event.time}</Text>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Text size="sm">{event.reportedBy}</Text>
-                </td>
-                <td>
+                </Table.Td>
+                <Table.Td>
                   <Text size="sm">{event.assignedTo}</Text>
-                </td>
-                <td>
-                  <ActionIcon variant="light" color="blue" radius="xl" onClick={() => onEventSelect(event)}>
-                    <BsEye size={18} />
-                  </ActionIcon>
-                </td>
-              </tr>
+                </Table.Td>
+                <Table.Td>
+                  <BsEye size={16} onClick={() => onEventSelect(event)} />
+                </Table.Td>
+              </Table.Tr>
             ))}
-          </tbody>
+          </Table.Tbody>
         </Table>
       </ScrollArea>
     </Paper>

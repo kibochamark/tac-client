@@ -15,14 +15,16 @@ const EventStatCard: FC<EventStatCardProps> = ({
   iconColor = 'green',
   icon,
 }) => {
-  const displayIcon = icon ?? <BiDotsVerticalRounded color={iconColor} size={12} />;
+  const displayIcon = icon ?? <BiDotsVerticalRounded color={iconColor} />;
 
   return (
     <Card withBorder radius="md" p={{ base: 'xs', sm: 'sm' }}>
       <Flex justify={'flex-start'} gap={{ base: 8, sm: 12 }} align="center">
-        <div style={{ flexShrink: 0 }}>
+        <div >
+
           {displayIcon}
         </div>
+
         <div style={{ minWidth: 0, flex: 1 }}>
           <Text fw={700} size="lg" c="dark">{count}</Text>
           <Text size="xs" c="dimmed" style={{ lineHeight: 1.2 }}>
