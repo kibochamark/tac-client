@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Alert, Button, Group, Stepper } from '@mantine/core'
 import { AlertCircle } from 'lucide-react'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import ContactInfoStep from './contact-info-step'
 import MedicalInfoStep from './medical-info-step'
 import PersonalInfoStep from './personal-info-step'
@@ -48,7 +49,7 @@ const PatientStepperForm: React.FC = () => {
         },
     })
 
-    const { trigger, getValues } = form
+    const { trigger } = form
 
     const steps = [
         { label: 'Personal Info', description: 'Basic information' },
@@ -111,8 +112,8 @@ const PatientStepperForm: React.FC = () => {
         try {
             const isValid = await form.trigger()
             if (isValid) {
-                const formData = getValues()
-                console.log('Patient Form Data:', formData)
+                // const formData = getValues()
+                toast.info('Processing patient data...')
 
                 // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 2000))
@@ -122,7 +123,7 @@ const PatientStepperForm: React.FC = () => {
                 setActiveStep(0)
                 // Clear localStorage after successful submission
                 localStorage.removeItem('patient-form-data')
-                alert('Patient information submitted successfully!')
+                toast.success('Patient information submitted successfully!')
             } else {
                 setSubmitError('Please fix all validation errors before submitting.')
             }
