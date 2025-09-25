@@ -27,18 +27,23 @@ export const NotificationButton = ({
             size="md"
             fullWidth
             justify={isCollapsed && !isMobile ? 'center' : 'flex-start'}
-            leftSection={<BiBell size={20} />}
+            leftSection={isCollapsed && !isMobile ? undefined : <BiBell size={20} />}
             rightSection={(!isCollapsed || isMobile) && count ? (
                 <Badge count={count} variant="notification" />
             ) : undefined}
             title={(isCollapsed && !isMobile) ? 'Notifications' : undefined}
             style={{
                 height: 'auto',
-                padding: '12px 16px',
+                padding: isCollapsed && !isMobile ? '12px 8px' : '12px 16px',
                 position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: isCollapsed && !isMobile ? 'center' : 'flex-start',
             }}
         >
-            {(!isCollapsed || isMobile) && (
+            {isCollapsed && !isMobile ? (
+                <BiBell size={20} />
+            ) : (
                 <Text size="sm" fw={500} style={{ flex: 1 }} ta="left">
                     Notifications
                 </Text>

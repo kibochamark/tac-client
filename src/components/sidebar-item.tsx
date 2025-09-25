@@ -27,7 +27,7 @@ export const SidebarItem = ({
             size="md"
             fullWidth
             justify={isCollapsed && !isMobile ? 'center' : 'flex-start'}
-            leftSection={<Icon size={20} />}
+            leftSection={isCollapsed && !isMobile ? undefined : <Icon size={20} />}
             rightSection={(!isCollapsed || isMobile) && count ? (
                 isActive ? (
                     <ActiveBadge isActive={isActive} />
@@ -38,10 +38,15 @@ export const SidebarItem = ({
             title={(isCollapsed && !isMobile) ? title : undefined}
             style={{
                 height: 'auto',
-                padding: '12px 16px',
+                padding: isCollapsed && !isMobile ? '12px 8px' : '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: isCollapsed && !isMobile ? 'center' : 'flex-start',
             }}
         >
-            {(!isCollapsed || isMobile) && (
+            {isCollapsed && !isMobile ? (
+                <Icon size={20} />
+            ) : (
                 <Text size="sm" fw={500} style={{ flex: 1 }} ta="left">
                     {title}
                 </Text>
