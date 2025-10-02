@@ -137,7 +137,7 @@ const PatientStepperForm: React.FC = () => {
     const renderStepContent = () => {
         switch (activeStep) {
             case 0:
-                return <PersonalInfoStep form={form} />
+                return <PersonalInfoStep form={form}/>
             case 1:
                 return <ContactInfoStep form={form} />
             case 2:
@@ -187,7 +187,7 @@ const PatientStepperForm: React.FC = () => {
             </div>
 
             {activeStep < 3 && (
-                <Group justify="flex-end" mt="xl">
+                <Group justify="space-between" mt="xl">
                     <Button variant="default" onClick={prevStep} disabled={activeStep === 0}>
                         Previous
                     </Button>

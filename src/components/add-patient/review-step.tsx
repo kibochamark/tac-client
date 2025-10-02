@@ -69,7 +69,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ form, onEdit, onSubmit, isSubmi
                         <Text size="sm"><strong>Date of Birth:</strong> {formatDate(data.dateOfBirth)}</Text>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <Text size="sm"><strong>Blood Group:</strong> <Badge color="red" variant="light">{data.bloodGroup}</Badge></Text>
+                        <Text size="sm" component="div"><strong>Blood Group:</strong> <Badge color="red" variant="light">{data.bloodGroup}</Badge></Text>
                     </Grid.Col>
                     <Grid.Col span={6}>
                         <Text size="sm"><strong>Marital Status:</strong> {data.maritalStatus || 'Not specified'}</Text>
@@ -117,7 +117,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ form, onEdit, onSubmit, isSubmi
             <InfoCard title="Medical Information">
                 <Grid>
                     <Grid.Col span={6}>
-                        <Text size="sm"><strong>Access Type:</strong> <Badge color="blue" variant="light">{data.accessType}</Badge></Text>
+                        <Text size="sm" component="div"><strong>Access Type:</strong> <Badge color="blue" variant="light">{data.accessType}</Badge></Text>
                     </Grid.Col>
                     <Grid.Col span={6}>
                         <Text size="sm"><strong>Access Location:</strong> {data.accessLocation}</Text>
@@ -130,12 +130,12 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ form, onEdit, onSubmit, isSubmi
                     </Grid.Col>
                     {data.accessMaturity && (
                         <Grid.Col span={6}>
-                            <Text size="sm"><strong>Access Maturity:</strong> <Badge color="green" variant="light">{data.accessMaturity}</Badge></Text>
+                            <Text size="sm" component="div"><strong>Access Maturity:</strong> <Badge color="green" variant="light">{data.accessMaturity}</Badge></Text>
                         </Grid.Col>
                     )}
                     {data.functionalStatus && (
                         <Grid.Col span={6}>
-                            <Text size="sm"><strong>Functional Status:</strong> <Badge color={data.functionalStatus === 'Functional' ? 'green' : 'red'} variant="light">{data.functionalStatus}</Badge></Text>
+                            <Text size="sm" component="div"><strong>Functional Status:</strong> <Badge color={data.functionalStatus === 'Functional' ? 'green' : 'red'} variant="light">{data.functionalStatus}</Badge></Text>
                         </Grid.Col>
                     )}
                     {data.accessCreationDate && (
