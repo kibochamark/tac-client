@@ -108,16 +108,16 @@ const CalendarView: React.FC<CalendarViewProps> = ({
     }
 
     // Create new appointment
-    const newAppointment: Appointment = {
-      id: Date.now().toString(),
-      patientName: formData.patientName,
-      doctorName: formData.doctorName,
-      date: formData.date,
-      time: formData.time,
-      reason: formData.reason,
-      status: 'scheduled',
-      duration: 60
-    }
+    // const newAppointment: Appointment = {
+    //   id: Date.now().toString(),
+    //   patientName: formData.patientName,
+    //   doctorName: formData.doctorName,
+    //   date: formData.date,
+    //   time: formData.time,
+    //   reason: formData.reason,
+    //   status: 'scheduled',
+    //   duration: 60
+    // }
 
     toast.success('Appointment created successfully!')
     // Here you would typically add the appointment to your state or make an API call

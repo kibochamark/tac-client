@@ -68,7 +68,7 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
           width: isMobile ? '256px' : isCollapsed ? '64px' : '256px',
           transform: isMobile ? (isMobileMenuOpen ? 'translateX(0)' : 'translateX(-100%)') : 'none',
           transition: 'all 0.3s ease',
-          zIndex: 50,
+          zIndex: 50,        
         }}
         radius={0}
         withBorder
@@ -82,7 +82,7 @@ export const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps)
             setIsMobileMenuOpen={setIsMobileMenuOpen}
           />
 
-          <Box style={{ flex: 1 }}>
+          <Box style={{ flex: 1, overflowY: 'auto' }}>
             <SidebarNavigation
               pathname={pathname}
               isCollapsed={isCollapsed}

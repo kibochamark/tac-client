@@ -1,6 +1,6 @@
 'use client'
 
-import { Container, Grid, Paper, Stack } from '@mantine/core'
+import { Grid, Paper, Stack } from '@mantine/core'
 import VascularAccessChart from "../../components/access-chart"
 import CommonAccessEvents from "../../components/access-events"
 import AppointmentsTable from "../../components/appointments-table"
@@ -10,15 +10,15 @@ import QuickActions from "../../components/quick-actions"
 import StatsCards from "../../components/statscard"
 
 const DashboardPage = () => (
-  <Container fluid p={0} style={{ minHeight: '100vh', overflow: 'hidden' }}>
+  // <Container fluid p={0} style={{ minHeight: '100vh', overflow: 'hidden' }}>
     <Stack gap={0} style={{ height: '100vh' }}>
       <DashboardHeader username='Sarah' showGreeting={true} notificationCount={5} />
 
-      <Container 
+      {/* <Container 
         fluid 
         p={{ base: 'xs', sm: 'sm', md: 'md' }} 
         style={{ flex: 1, overflow: 'auto' }}
-      >
+      > */}
         <Stack gap="md">
           <StatsCards />
 
@@ -51,9 +51,9 @@ const DashboardPage = () => (
             <AppointmentsTable />
           </Paper>
         </Stack>
-      </Container>
+      {/* </Container> */}
     </Stack>
-  </Container>
+  // </Container>
 )
 
 export default DashboardPage

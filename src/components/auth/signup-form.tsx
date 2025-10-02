@@ -31,6 +31,7 @@ const SignupForm = () => {
 
   const onSubmit = (data: FormData) => {
     toast.success('Account created successfully!');
+    console.log(data);
   };
 
   return (

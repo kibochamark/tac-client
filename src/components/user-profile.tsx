@@ -17,7 +17,7 @@ export const UserProfile = ({ isCollapsed, isMobile, onOpenModal, user }: UserPr
 
     return (
         <div
-            className={`flex items-center border border-gray-200 bg-white rounded-lg p-2 cursor-pointer hover:bg-gray-50 ${collapsed}`}
+            className={`flex items-center p-2 cursor-pointer hover:bg-gray-100 rounded-lg ${collapsed}`}
             onClick={onOpenModal}
         >
             <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">
